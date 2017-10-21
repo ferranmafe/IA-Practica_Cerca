@@ -90,7 +90,7 @@ public class State {
         int dt1 = getDistanceTrip(i, j);
         int dt2 = getDistanceTrip(l, m);
 
-        boolean dOk = d1 - dt1 + dt2 <= 540 && d2 - dt2 + dt1 <= 540;
+        boolean dOk = d1 - dt1 + dt2 <= 640 && d2 - dt2 + dt1 <= 640;
 
         return trucks.get(i).get(j).getOrder(k) != null && trucks.get(l).get(m).getOrder(n) != null
                 && (i != l || j != m) && dOk;
