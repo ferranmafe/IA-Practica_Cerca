@@ -29,12 +29,10 @@ public class State {
         ghost = distr.size();
         trucks = new ArrayList<>(ghost + 1);
 
-        emptyTrips();
-
         //crear estado inicial a partir de los desasignados
     }
 
-    private void emptyTrips() {
+    public void emptyTrips() {
         Order[] o = new Order[2];
         int count = 0;
 
@@ -169,5 +167,13 @@ public class State {
 
     public boolean isGoal(){
         return true;
+    }
+
+    public int getCostTravels() {
+        int distance_cost = 0;
+        for (int i = 0; i < ghost; ++i) {
+            distance_cost += sumDistance(i);
+        }
+        return distance_cost * 2;
     }
 }
