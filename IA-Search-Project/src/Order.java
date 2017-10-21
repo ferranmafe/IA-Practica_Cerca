@@ -23,6 +23,4 @@ public class Order {
     public int getNumOrder(){
         return numOrder;
     }
-
-
 }
