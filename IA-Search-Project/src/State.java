@@ -10,6 +10,7 @@ public class State {
     private static int max_trips;
     private static int max_distance;
 
+
     private ArrayList<ArrayList<Trip>> trucks;
 
     private int ghost;
@@ -31,12 +32,10 @@ public class State {
 
         trucks = new ArrayList<>(ghost + 1);
 
-        emptyTrips();
-
         //crear estado inicial a partir de los desasignados
     }
 
-    private void emptyTrips() {
+    public void emptyTrips() {
         Order[] o = new Order[2];
         int count = 0;
 
@@ -44,7 +43,8 @@ public class State {
             ArrayList<Integer> gasOrders = gas.get(i).getPeticiones();
             for (int j = 0; j < gasOrders.size(); ++j) {
                 Order order = new Order(i, j);
-                if (i % 2 == 0) o[0] = order;
+                if (i % 2 == 0)
+                    o[0] = order;
                 else {
                     o[1] = order;
                     trucks.get(ghost).add(new Trip(o));
@@ -53,7 +53,7 @@ public class State {
         }
 
         if (count % 2 == 0) {
-            o[2] = null;
+            o[1] = null;
             trucks.get(ghost).add(new Trip(o));
         }
 
@@ -145,13 +145,50 @@ public class State {
         return 0;
     }
 
-    protected int getCostTrips(){
+
+    protected int getCostTrips() {
         int cost = 0;
-        for (int i = 0; i < ghost; ++i){
-            for (int j = 0; j < trucks.get(i).size(); ++j){
+        for (int i = 0; i < ghost; ++i) {
+            for (int j = 0; j < trucks.get(i).size(); ++j) {
                 cost += getDistanceTrip(i, j);
             }
         }
         return cost;
+    }
+
+    public int getBenefits() {
+        int benefits = 0;
+        for (int i = 0; i < ghost; ++i) {
+            for (int j = 0; j < trucks.get(i).size(); ++j) {
+                for (int k = 0; k < 2; ++k){
+                    Order order = trucks.get(i).get(j).getOrder(k);
+                    if (order != null) {
+                        int gas_station_num = order.getGasStation();
+                        int order_num = order.getNumOrder();
+                        int dias_peticion = gas.get(gas_station_num).getPeticiones().get(order_num);
+                        int percentatge_over_total;
+                        if (dias_peticion == 0) {
+                            percentatge_over_total = 102;
+                        } else {
+                            percentatge_over_total = (int) (100 - Math.pow((double) 2, (double) dias_peticion));
+                        }
+                        benefits += 1000 * (percentatge_over_total) / 100;
+                    }
+                }
+            }
+        }
+        return benefits;
+    }
+
+    public boolean isGoal(){
+        return true;
+    }
+
+    public int getCostTravels() {
+        int distance_cost = 0;
+        for (int i = 0; i < ghost; ++i) {
+            distance_cost += sumDistance(i);
+        }
+        return distance_cost * 2;
     }
 }

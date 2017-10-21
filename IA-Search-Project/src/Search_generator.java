@@ -5,6 +5,9 @@ import aima.search.framework.*;
 import aima.search.informed.HillClimbingSearch;
 import aima.search.informed.SimulatedAnnealingSearch;
 
+import java.util.Iterator;
+import java.util.List;
+import java.util.Properties;
 import java.util.Scanner;
 
 import static java.lang.String.valueOf;
@@ -178,7 +181,7 @@ public class Search_generator {
                 dc_seed = -1;
             }
             if (dc_seed > -1) {
-                this.distrubution_centers_mult = dc_seed;
+                this.distribution_centers_seed = dc_seed;
             }
             else {
                 System.out.println("Wrong command.");
@@ -270,46 +273,83 @@ public class Search_generator {
     void generate_search() {
         System.out.println("Starting to generate the search ...");
 
-        CentrosDistribucion centros_distribucion = new CentrosDistribucion(this.distribution_centers_num, this.distrubution_centers_mult, this.distribution_centers_seed);
-        Gasolineras gasolineras = new Gasolineras(this.petrol_stations_num, this.petrol_stations_seed);
+        try {
+            CentrosDistribucion centros_distribucion = new CentrosDistribucion(this.distribution_centers_num, this.distrubution_centers_mult, this.distribution_centers_seed);
+            Gasolineras gasolineras = new Gasolineras(this.petrol_stations_num, this.petrol_stations_seed);
 
-        SuccessorFunction successor = null;
-        HeuristicFunction heuristic = null;
-        Problem problem = null;
-        Search search = null;
+            SuccessorFunction successor = null;
+            HeuristicFunction heuristic = null;
+            Problem problem = null;
+            Search search = null;
 
-        switch (this.heuristic_function) {
-            case 0:
-                //heuristic = new HeuristicFunction0();
-                break;
+            switch (this.heuristic_function) {
+                case 0:
+                    heuristic = new HeuristicFunction1();
+                    break;
+
+                default:
+                    heuristic = new HeuristicFunction1();
+            }
+
+            switch (this.successors_function) {
+                case 0:
+                    successor = new SuccesorFunction();
+                    break;
+
+                default:
+                    successor = new SuccesorFunction();
+            }
+
+            State initial_state = new State(gasolineras, centros_distribucion);
+
+            switch (this.initial_distribution) {
+                case 0:
+                    initial_state.emptyTrips();
+                    break;
+
+                default:
+                    initial_state.emptyTrips();
+            }
+
+            if (this.local_search_algorithm.equals("HC")) {
+                search = new HillClimbingSearch();
+            }
+            /*else if (this.local_search_algorithm.equals("SA")) {
+                search = new SimulatedAnnealingSearch(steps, stiter, k, lamb);
+            }*/
+
+            problem = new Problem(initial_state, successor, new IAGoalTest(), heuristic);
+
+            SearchAgent agent = new SearchAgent(problem, search);
+
+            // We print the results of the search
+            System.out.println();
+            printActions(agent.getActions());
+            printInstrumentation(agent.getInstrumentation());
+
+            // You can access also to the goal state using the
+            // method getGoalState of class Search
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static void printInstrumentation(Properties properties) {
+        Iterator keys = properties.keySet().iterator();
+        while (keys.hasNext()) {
+            String key = (String) keys.next();
+            String property = properties.getProperty(key);
+            System.out.println(key + " : " + property);
         }
 
-        switch (this.successors_function) {
-            case 0:
-                //successor = new SuccessorsFunction0();
-                break;
+    }
+
+    private static void printActions(List actions) {
+        for (int i = 0; i < actions.size(); i++) {
+            String action = (String) actions.get(i);
+            System.out.println(action);
         }
-
-        State initial_state = new State(gasolineras, centros_distribucion);
-
-        switch (this.initial_distribution) {
-            case 0:
-                //initial_state.generate_distribution_x();
-                break;
-        }
-
-        if (this.local_search_algorithm.equals("HC")) {
-            search =  new HillClimbingSearch();
-        }
-        else if (this.local_search_algorithm.equals("SA")) {
-            //search = new SimulatedAnnealingSearch(steps, stiter, k, lamb);
-        }
-
-        //problem =  new Problem(State, successor, new SearchGoal(), heuristic);
-
-        //SearchAgent agent = new SearchAgent(problem,search);
-
-
     }
 
     String enter_new_string() {
