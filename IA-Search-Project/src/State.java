@@ -147,10 +147,27 @@ public class State {
         int benefits = 0;
         for (int i = 0; i < ghost; ++i) {
             for (int j = 0; j < trucks.get(i).size(); ++j) {
-                int percentatge_over_total;
-                if (trucks.get(i))
-                    benefits += 1000 *
+                for (int k = 0; k < 2; ++k){
+                    Order order = trucks.get(i).get(j).getOrder(k);
+                    if (order != null) {
+                        int gas_station_num = order.getGasStation();
+                        int order_num = order.getNumOrder();
+                        int dias_peticion = gas.get(gas_station_num).getPeticiones().get(order_num);
+                        int percentatge_over_total;
+                        if (dias_peticion == 0) {
+                            percentatge_over_total = 102;
+                        } else {
+                            percentatge_over_total = (int) (100 - Math.pow((double) 2, (double) dias_peticion));
+                        }
+                        benefits += 1000 * (percentatge_over_total) / 100;
+                    }
+                }
             }
         }
+        return benefits;
+    }
+
+    public boolean isGoal(){
+        return true;
     }
 }
