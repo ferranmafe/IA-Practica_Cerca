@@ -1,5 +1,6 @@
 import IA.Gasolina.*;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class State {
@@ -8,6 +9,7 @@ public class State {
     private static CentrosDistribucion distr;
 
     private static int max_trips;
+    private static int max_distance;
 
 
     private ArrayList<ArrayList<Trip> > trucks;
@@ -25,9 +27,12 @@ public class State {
     public State(Gasolineras g, CentrosDistribucion c) {
         gas = g;
         distr = c;
-        max_trips = 5;
         ghost = distr.size();
-        trucks = new ArrayList<>();
+        max_trips = 5;
+        max_distance = 640;
+
+        trucks = new ArrayList<>(ghost + 1);
+
         for (int i = 0; i < ghost + 1; i++){
             trucks.add(new ArrayList<>());
         }
@@ -88,7 +93,7 @@ public class State {
         trucks.get(l).get(m).setOrder(aux, n);
     }
 
-    public int sumDistance(int i){
+    private int sumDistance(int i){
         int sum = 0;
         for (int j = 0; j < trucks.get(i).size(); ++j){
             sum += getDistanceTrip(i, j);
@@ -96,7 +101,7 @@ public class State {
         return sum;
     }
 
-    public boolean canSwap(int i, int j, int k, int l, int m, int n) {
+    protected boolean canSwap(int i, int j, int k, int l, int m, int n) {
         if (trucks.get(i).get(j).getOrder(k) == null && trucks.get(l).get(m).getOrder(n) == null) {
             return false;
         }
@@ -115,11 +120,24 @@ public class State {
         return (i != l || j != m) && dOk;
     }
 
-    public boolean isNullOrder(int i, int j, int k){
+    protected boolean isNullOrder(int i, int j, int k){
         return trucks.get(i).get(j).getOrder(k) == null;
     }
 
-    public ArrayList<ArrayList<Trip>> getState() {
+    public State getCopy(){
+        ArrayList<ArrayList<Trip>> copy = new ArrayList<>(ghost + 1);
+
+        for (int i = 0; i < ghost + 1; i++){
+            copy.add(new ArrayList<>());
+            for (int j = 0; j < trucks.get(i).size(); ++j){
+                copy.get(i).add(trucks.get(i).get(j).getCopy());
+            }
+        }
+
+        return new State(copy);
+    }
+
+    ArrayList<ArrayList<Trip>> getState(){
         return trucks;
     }
 
@@ -131,7 +149,7 @@ public class State {
         return Math.abs(distr.get(i).getCoordX() - gas.get(j).getCoordX()) + Math.abs(distr.get(i).getCoordY() - gas.get(j).getCoordY());
     }
 
-    public int getDistanceTrip(int i, int j) {
+    private int getDistanceTrip(int i, int j) {
         if (trucks.get(i).get(j).getOrder(0) != null){
             int firstGas = trucks.get(i).get(j).getOrder(0).getGasStation();
             if (trucks.get(i).get(j).getOrder(0) != null){
@@ -147,6 +165,17 @@ public class State {
             return 2 * getDistanceCenter(i, secondGas);
         }
         return 0;
+    }
+
+
+    protected int getCostTrips() {
+        int cost = 0;
+        for (int i = 0; i < ghost; ++i) {
+            for (int j = 0; j < trucks.get(i).size(); ++j) {
+                cost += getDistanceTrip(i, j);
+            }
+        }
+        return cost;
     }
 
     public int getBenefits() {

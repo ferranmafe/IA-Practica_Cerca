@@ -23,4 +23,8 @@ public class Order {
     public int getNumOrder(){
         return numOrder;
     }
+
+    public Order getCopy(){
+        return new Order(gasStation, numOrder);
+    }
 }
