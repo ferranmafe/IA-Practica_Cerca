@@ -178,7 +178,7 @@ public class Search_generator {
                 dc_seed = -1;
             }
             if (dc_seed > -1) {
-                this.distrubution_centers_mult = dc_seed;
+                this.distribution_centers_seed = dc_seed;
             }
             else {
                 System.out.println("Wrong command.");
@@ -273,6 +273,8 @@ public class Search_generator {
         CentrosDistribucion centros_distribucion = new CentrosDistribucion(this.distribution_centers_num, this.distrubution_centers_mult, this.distribution_centers_seed);
         Gasolineras gasolineras = new Gasolineras(this.petrol_stations_num, this.petrol_stations_seed);
 
+        System.out.println("Petrol stations and Distribution centers created!");
+
         SuccessorFunction successor = null;
         HeuristicFunction heuristic = null;
         Problem problem = null;
@@ -280,17 +282,17 @@ public class Search_generator {
 
         switch (this.heuristic_function) {
             case 0:
-                //heuristic = new HeuristicFunction0();
+                heuristic = new HeuristicFunction1();
                 break;
         }
 
         switch (this.successors_function) {
             case 0:
-                //successor = new SuccessorsFunction0();
+                successor = new SuccessorFunction();
                 break;
         }
 
-        State initial_state = new State(gasolineras, centros_distribucion);
+        //State initial_state = new State(gasolineras, centros_distribucion);
 
         switch (this.initial_distribution) {
             case 0:
@@ -299,7 +301,7 @@ public class Search_generator {
         }
 
         if (this.local_search_algorithm.equals("HC")) {
-            search =  new HillClimbingSearch();
+//            search =  new HillClimbingSearch();
         }
         else if (this.local_search_algorithm.equals("SA")) {
             //search = new SimulatedAnnealingSearch(steps, stiter, k, lamb);

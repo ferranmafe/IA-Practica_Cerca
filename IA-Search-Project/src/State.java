@@ -141,4 +141,15 @@ public class State {
         }
         return 0;
     }
+
+    public int getBenefits() {
+        int benefits = 0;
+        for (int i = 0; i < ghost; ++i) {
+            for (int j = 0; j < trucks.get(i).size(); ++j) {
+                int percentatge_over_total;
+                if (trucks.get(i))
+                    benefits += 1000 *
+            }
+        }
+    }
 }
