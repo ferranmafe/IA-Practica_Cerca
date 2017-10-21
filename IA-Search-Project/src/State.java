@@ -7,6 +7,9 @@ public class State {
     private static Gasolineras gas;
     private static CentrosDistribucion distr;
 
+    private static int max_trips;
+    private static int max_distance;
+
     private ArrayList<ArrayList<Trip>> trucks;
 
     private int ghost;
@@ -22,8 +25,10 @@ public class State {
     public State(Gasolineras g, CentrosDistribucion c) {
         gas = g;
         distr = c;
-
         ghost = distr.size();
+        max_trips = 5;
+        max_distance = 640;
+
         trucks = new ArrayList<>(ghost + 1);
 
         emptyTrips();
@@ -51,6 +56,15 @@ public class State {
             o[2] = null;
             trucks.get(ghost).add(new Trip(o));
         }
+
+        for (int i = 0; i < distr.size(); i++){
+            for (int j = 0; j < max_trips; j++){
+                Order[] o2 = new Order[2];
+                o2[0] = null;
+                o2[1] = null;
+                trucks.get(i).add(new Trip(o2));
+            }
+        }
     }
 
     //Generar estado inicial
@@ -74,7 +88,7 @@ public class State {
         trucks.get(l).get(m).setOrder(aux, n);
     }
 
-    public int sumDistance(int i){
+    private int sumDistance(int i){
         int sum = 0;
         for (int j = 0; j < trucks.get(i).size(); ++j){
             sum += getDistanceTrip(i, j);
@@ -82,26 +96,23 @@ public class State {
         return sum;
     }
 
-    public boolean canSwap(int i, int j, int k, int l, int m, int n) {
-
+    protected boolean canSwap(int i, int j, int k, int l, int m, int n) {
+        if (trucks.get(i).get(j).getOrder(k) == null && trucks.get(l).get(m).getOrder(n) == null) {
+            return false;
+        }
         int d1 = sumDistance(i);
         int d2 = sumDistance(l);
 
         int dt1 = getDistanceTrip(i, j);
         int dt2 = getDistanceTrip(l, m);
 
-        boolean dOk = d1 - dt1 + dt2 <= 640 && d2 - dt2 + dt1 <= 640;
+        boolean dOk = d1 - dt1 + dt2 <= max_distance && d2 - dt2 + dt1 <= max_distance;
 
-        return (trucks.get(i).get(j).getOrder(k) != null || trucks.get(l).get(m).getOrder(n) != null)
-                && (i != l || j != m) && dOk;
+        return (i != l || j != m) && dOk;
     }
 
-    public boolean canMove(int i, int j, int k, int l, int m) {
-        return true;
-    }
-
-    public void move(int i, int j, int k, int l, int m) {
-
+    protected boolean isNullOrder(int i, int j, int k){
+        return trucks.get(i).get(j).getOrder(k) == null;
     }
 
     public ArrayList<ArrayList<Trip>> getState() {
@@ -116,12 +127,31 @@ public class State {
         return Math.abs(distr.get(i).getCoordX() - gas.get(j).getCoordX()) + Math.abs(distr.get(i).getCoordY() - gas.get(j).getCoordY());
     }
 
-    public int getDistanceTrip(int i, int j) {
-        int firstGas = trucks.get(i).get(j).getOrder(0).getGasStation();
-        if (trucks.get(i).get(j) != null) {
-            int secondGas = trucks.get(i).get(j).getOrder(1).getGasStation();
-            return getDistanceCenter(i, firstGas) + getDistanceGas(firstGas, secondGas) + getDistanceCenter(i, secondGas);
+    private int getDistanceTrip(int i, int j) {
+        if (trucks.get(i).get(j).getOrder(0) != null){
+            int firstGas = trucks.get(i).get(j).getOrder(0).getGasStation();
+            if (trucks.get(i).get(j).getOrder(0) != null){
+                int secondGas = trucks.get(i).get(j).getOrder(1).getGasStation();
+                return getDistanceCenter(i, firstGas) + getDistanceGas(firstGas, secondGas) + getDistanceCenter(i, secondGas);
+            }
+            else {
+                return 2 * getDistanceCenter(i, firstGas);
+            }
         }
-        return 2 * getDistanceCenter(i, firstGas);
+        else if (trucks.get(i).get(j).getOrder(0) != null){
+            int secondGas = trucks.get(i).get(j).getOrder(1).getGasStation();
+            return 2 * getDistanceCenter(i, secondGas);
+        }
+        return 0;
+    }
+
+    protected int getCostTrips(){
+        int cost = 0;
+        for (int i = 0; i < ghost; ++i){
+            for (int j = 0; j < trucks.get(i).size(); ++j){
+                cost += getDistanceTrip(i, j);
+            }
+        }
+        return cost;
     }
 }
