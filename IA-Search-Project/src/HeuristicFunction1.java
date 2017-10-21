@@ -14,6 +14,6 @@ public class HeuristicFunction1 implements HeuristicFunction
     public double getHeuristicValue(Object state)
     {
         State DCState = (State) state;
-        return (DCState.);
+        return -(DCState.getBenefits() - DCState.getCostTravels());
     }
 }

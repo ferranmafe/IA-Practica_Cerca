@@ -273,8 +273,6 @@ public class Search_generator {
         CentrosDistribucion centros_distribucion = new CentrosDistribucion(this.distribution_centers_num, this.distrubution_centers_mult, this.distribution_centers_seed);
         Gasolineras gasolineras = new Gasolineras(this.petrol_stations_num, this.petrol_stations_seed);
 
-        System.out.println("Petrol stations and Distribution centers created!");
-
         SuccessorFunction successor = null;
         HeuristicFunction heuristic = null;
         Problem problem = null;
@@ -284,32 +282,38 @@ public class Search_generator {
             case 0:
                 heuristic = new HeuristicFunction1();
                 break;
+
+            default: heuristic = new HeuristicFunction1();
         }
 
         switch (this.successors_function) {
             case 0:
-                successor = new SuccessorFunction();
+                successor = new SuccesorFunction();
                 break;
+
+            default: successor = new SuccesorFunction();
         }
 
-        //State initial_state = new State(gasolineras, centros_distribucion);
+        State initial_state = new State(gasolineras, centros_distribucion);
 
         switch (this.initial_distribution) {
             case 0:
-                //initial_state.generate_distribution_x();
+                initial_state.emptyTrips();
                 break;
+
+            default: initial_state.emptyTrips();
         }
 
         if (this.local_search_algorithm.equals("HC")) {
-//            search =  new HillClimbingSearch();
+            search =  new HillClimbingSearch();
         }
-        else if (this.local_search_algorithm.equals("SA")) {
-            //search = new SimulatedAnnealingSearch(steps, stiter, k, lamb);
-        }
+        /*else if (this.local_search_algorithm.equals("SA")) {
+            search = new SimulatedAnnealingSearch(steps, stiter, k, lamb);
+        }*/
 
-        //problem =  new Problem(State, successor, new SearchGoal(), heuristic);
+        problem =  new Problem(initial_state, successor, new IAGoalTest(), heuristic);
 
-        //SearchAgent agent = new SearchAgent(problem,search);
+        SearchAgent agent = new SearchAgent(problem, search);
 
 
     }
