@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="Gasolina1">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/src/Gasolina.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
