@@ -84,7 +84,7 @@ public class State {
         return true;
     }
 
-    public void move() {
+    public void move(int i, int j, int k, int l, int m) {
 
     }
 
