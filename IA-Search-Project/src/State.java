@@ -92,7 +92,7 @@ public class State {
 
         boolean dOk = d1 - dt1 + dt2 <= 640 && d2 - dt2 + dt1 <= 640;
 
-        return trucks.get(i).get(j).getOrder(k) != null && trucks.get(l).get(m).getOrder(n) != null
+        return (trucks.get(i).get(j).getOrder(k) != null || trucks.get(l).get(m).getOrder(n) != null)
                 && (i != l || j != m) && dOk;
     }
 

@@ -22,7 +22,7 @@ public class SuccesorFunction implements SuccessorFunction {
         //  El camión fantasma no cambia órdenes con nadie, ya que todos los camiones han cambiado antes
         //  sus órdenes por órdenes del camión fantasma, y no tiene sentido que cambie consigo mismo
         //  Cuando un camión hace un cambio consigo mismo, no lo hará con dos órdenes de un mismo viaje (canSwap)
-        //  Además, canSwap comprueba que al menos uno de los dos
+        //  Además se comprueban las distancias y que no sean los dos nulos
 
         for (int i = 0; i < trucks.size(); ++i){
             for (int j = 0; j < trucks.get(i).size(); ++j){
