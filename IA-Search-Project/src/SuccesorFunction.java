@@ -12,7 +12,7 @@ public class SuccesorFunction implements SuccessorFunction {
 
     public List getSuccessors(Object aState) {
         ArrayList retVal= new ArrayList();
-        State state = (State) aState;
+        State state = ((State) aState).getCopy();
         ArrayList<ArrayList<Trip>> trucks = state.getState();
 
         //BUCLE PARA SWAPS
@@ -39,7 +39,7 @@ public class SuccesorFunction implements SuccessorFunction {
                             for (int m = 0; m < trucks.get(l).size(); ++m) {
                                 for (int n = 0; n < 2; ++n) {
                                     if (state.canSwap(i, j, k, l, m, n)) {
-                                        State nState = ((State) aState).getCopy();
+                                        State nState = state.getCopy();
                                         nState.swap(i, j, k, l, m, n);
                                         retVal.add(new Successor("", nState));
                                     }
