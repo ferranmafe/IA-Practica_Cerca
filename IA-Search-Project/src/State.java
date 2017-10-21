@@ -9,6 +9,7 @@ public class State {
 
     private static int max_trips;
 
+
     private ArrayList<ArrayList<Trip>> trucks;
 
     private int ghost;
