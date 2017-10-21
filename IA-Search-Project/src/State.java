@@ -14,7 +14,7 @@ public class State {
 
     private ArrayList<ArrayList<Trip> > trucks;
 
-    private int ghost;
+    private static int ghost;
 
     public State() {
 
@@ -105,18 +105,31 @@ public class State {
         if (trucks.get(i).get(j).getOrder(k) == null && trucks.get(l).get(m).getOrder(n) == null) {
             return false;
         }
-        int d1 = sumDistance(i);
-        int d2 = sumDistance(l);
 
-        int dt1 = getDistanceTrip(i, j);
-        int dt2 = getDistanceTrip(l, m);
+        boolean dOk;
 
-        if (i == ghost){
-            d1 = 0;
+        if (i == getGhost()){
+            int d2 = sumDistance(l);
+            if (trucks.get(i).get(j).getOrder(k) == null) dOk = true;
+            else {
+                int d2c1 = getDistanceCenter(l, trucks.get(i).get(m).getOrder(k).getGasStation());
+                int d2c2 = getDistanceCenter(l, trucks.get(l).get(m).getOrder(n).getGasStation());
+                dOk =  d2 - d2c1 + d2c2 < max_distance;
+            }
+
         }
+        else {
+            int d1 = sumDistance(i);
+            int d2 = sumDistance(l);
 
-        boolean dOk = d1 - dt1 + dt2 <= 640 && d2 - dt2 + dt1 <= 640;
+            int d1c1 = getDistanceCenter(i, trucks.get(i).get(j).getOrder(k).getGasStation());
+            int d1c2 = getDistanceCenter(i, trucks.get(l).get(m).getOrder(n).getGasStation());
+            int d2c2 = getDistanceCenter(l, trucks.get(l).get(m).getOrder(n).getGasStation());
+            int d2c1 = getDistanceCenter(l, trucks.get(i).get(m).getOrder(k).getGasStation());
 
+
+            dOk = d1 - d1c1 + d1c2 <= max_distance && d2 - d2c2 + d2c1 <= max_distance;
+        }
         return (i != l || j != m) && dOk;
     }
 
@@ -125,7 +138,7 @@ public class State {
     }
 
     public State getCopy(){
-        ArrayList<ArrayList<Trip>> copy = new ArrayList<>(ghost + 1);
+        ArrayList<ArrayList<Trip>> copy = new ArrayList<>(getGhost() + 1);
 
         for (int i = 0; i < ghost + 1; i++){
             copy.add(new ArrayList<>());
@@ -142,11 +155,11 @@ public class State {
     }
 
     private int getDistanceGas(int i, int j) {
-        return Math.abs(gas.get(i).getCoordX() - gas.get(j).getCoordX()) + Math.abs(gas.get(i).getCoordY() - gas.get(j).getCoordY());
+        return Math.abs(getGas().get(i).getCoordX() - gas.get(j).getCoordX()) + Math.abs(gas.get(i).getCoordY() - gas.get(j).getCoordY());
     }
 
     private int getDistanceCenter(int i, int j) {
-        return Math.abs(distr.get(i).getCoordX() - gas.get(j).getCoordX()) + Math.abs(distr.get(i).getCoordY() - gas.get(j).getCoordY());
+        return Math.abs(getDistr().get(i).getCoordX() - gas.get(j).getCoordX()) + Math.abs(distr.get(i).getCoordY() - gas.get(j).getCoordY());
     }
 
     private int getDistanceTrip(int i, int j) {
@@ -165,17 +178,6 @@ public class State {
             return 2 * getDistanceCenter(i, secondGas);
         }
         return 0;
-    }
-
-
-    protected int getCostTrips() {
-        int cost = 0;
-        for (int i = 0; i < ghost; ++i) {
-            for (int j = 0; j < trucks.get(i).size(); ++j) {
-                cost += getDistanceTrip(i, j);
-            }
-        }
-        return cost;
     }
 
     public int getBenefits() {
@@ -212,5 +214,17 @@ public class State {
             distance_cost += sumDistance(i);
         }
         return distance_cost * 2;
+    }
+
+    private static CentrosDistribucion getDistr(){
+        return distr;
+    }
+
+    private static Gasolineras getGas(){
+        return gas;
+    }
+
+    private static int getGhost(){
+        return ghost;
     }
 }
