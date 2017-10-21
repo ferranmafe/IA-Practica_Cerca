@@ -106,6 +106,10 @@ public class State {
         int dt1 = getDistanceTrip(i, j);
         int dt2 = getDistanceTrip(l, m);
 
+        if (i == ghost){
+            d1 = 0;
+        }
+
         boolean dOk = d1 - dt1 + dt2 <= 640 && d2 - dt2 + dt1 <= 640;
 
         return (i != l || j != m) && dOk;
