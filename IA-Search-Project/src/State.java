@@ -74,10 +74,26 @@ public class State {
         trucks.get(l).get(m).setOrder(aux, n);
     }
 
+    public int sumDistance(int i){
+        int sum = 0;
+        for (int j = 0; j < trucks.get(i).size(); ++j){
+            sum += getDistanceTrip(i, j);
+        }
+        return sum;
+    }
+
     public boolean canSwap(int i, int j, int k, int l, int m, int n) {
 
+        int d1 = sumDistance(i);
+        int d2 = sumDistance(l);
+
+        int dt1 = getDistanceTrip(i, j);
+        int dt2 = getDistanceTrip(l, m);
+
+        boolean dOk = d1 - dt1 + dt2 <= 540 && d2 - dt2 + dt1 <= 540;
+
         return trucks.get(i).get(j).getOrder(k) != null && trucks.get(l).get(m).getOrder(n) != null
-                && (i != l || j != m);
+                && (i != l || j != m) && dOk;
     }
 
     public boolean canMove(int i, int j, int k, int l, int m) {
