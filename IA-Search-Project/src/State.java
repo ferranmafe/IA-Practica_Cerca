@@ -40,7 +40,8 @@ public class State {
             ArrayList<Integer> gasOrders = gas.get(i).getPeticiones();
             for (int j = 0; j < gasOrders.size(); ++j) {
                 Order order = new Order(i, j);
-                if (i % 2 == 0) o[0] = order;
+                if (i % 2 == 0)
+                    o[0] = order;
                 else {
                     o[1] = order;
                     trucks.get(ghost).add(new Trip(o));
@@ -49,7 +50,7 @@ public class State {
         }
 
         if (count % 2 == 0) {
-            o[2] = null;
+            o[1] = null;
             trucks.get(ghost).add(new Trip(o));
         }
 
