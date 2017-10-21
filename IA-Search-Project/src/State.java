@@ -1,5 +1,6 @@
 import IA.Gasolina.*;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class State {
@@ -11,7 +12,7 @@ public class State {
     private static int max_distance;
 
 
-    private ArrayList<ArrayList<Trip>> trucks;
+    private ArrayList<ArrayList<Trip> > trucks;
 
     private int ghost;
 
@@ -31,6 +32,10 @@ public class State {
         max_distance = 640;
 
         trucks = new ArrayList<>(ghost + 1);
+
+        for (int i = 0; i < ghost + 1; i++){
+            trucks.add(new ArrayList<>());
+        }
 
         //crear estado inicial a partir de los desasignados
     }
@@ -115,8 +120,18 @@ public class State {
         return trucks.get(i).get(j).getOrder(k) == null;
     }
 
-    public ArrayList<ArrayList<Trip>> getState() {
-        return trucks;
+    @Override
+    protected State clone() throws CloneNotSupportedException {
+        ArrayList<ArrayList<Trip>> copy = new ArrayList<>(ghost + 1);
+
+        for (int i = 0; i < ghost + 1; i++){
+            copy.add(new ArrayList<>());
+            for (int j = 0; j < trucks.get(i).size(); ++j){
+                copy.get(i).add((Trip)trucks.get(i).get(j).clone());
+            }
+        }
+
+        return new State(copy);
     }
 
     private int getDistanceGas(int i, int j) {

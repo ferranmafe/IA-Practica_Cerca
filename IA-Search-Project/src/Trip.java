@@ -34,4 +34,12 @@ public class Trip {
         return orders[i];
     }
 
+    @Override
+    protected Object clone() throws CloneNotSupportedException {
+        Order [] copy = new Order[2];
+        for (int i = 0; i < 2; ++i){
+            copy[i] = (Order) orders[i].clone();
+        }
+        return new Trip(copy);
+    }
 }

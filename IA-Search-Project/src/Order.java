@@ -23,4 +23,9 @@ public class Order {
     public int getNumOrder(){
         return numOrder;
     }
+
+    @Override
+    protected Object clone() throws CloneNotSupportedException {
+        return new Order(gasStation, numOrder);
+    }
 }
