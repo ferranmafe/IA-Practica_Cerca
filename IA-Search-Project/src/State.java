@@ -10,7 +10,7 @@ public class State {
     private static int max_trips;
 
 
-    private ArrayList<ArrayList<Trip>> trucks;
+    private ArrayList<ArrayList<Trip> > trucks;
 
     private int ghost;
 
@@ -27,7 +27,10 @@ public class State {
         distr = c;
         max_trips = 5;
         ghost = distr.size();
-        trucks = new ArrayList<>(ghost + 1);
+        trucks = new ArrayList<>();
+        for (int i = 0; i < ghost + 1; i++){
+            trucks.add(new ArrayList<>());
+        }
 
         //crear estado inicial a partir de los desasignados
     }
