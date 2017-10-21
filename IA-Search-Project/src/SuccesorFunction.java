@@ -39,7 +39,7 @@ public class SuccesorFunction implements SuccessorFunction {
                             for (int m = 0; m < trucks.get(l).size(); ++m) {
                                 for (int n = 0; n < 2; ++n) {
                                     if (state.canSwap(i, j, k, l, m, n)) {
-                                        State nState = new State(trucks);
+                                        State nState = ((State) aState).getCopy();
                                         nState.swap(i, j, k, l, m, n);
                                         retVal.add(new Successor("", nState));
                                     }

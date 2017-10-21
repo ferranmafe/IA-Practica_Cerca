@@ -120,18 +120,21 @@ public class State {
         return trucks.get(i).get(j).getOrder(k) == null;
     }
 
-    @Override
-    protected State clone() throws CloneNotSupportedException {
+    public State getCopy(){
         ArrayList<ArrayList<Trip>> copy = new ArrayList<>(ghost + 1);
 
         for (int i = 0; i < ghost + 1; i++){
             copy.add(new ArrayList<>());
             for (int j = 0; j < trucks.get(i).size(); ++j){
-                copy.get(i).add((Trip)trucks.get(i).get(j).clone());
+                copy.get(i).add(trucks.get(i).get(j).getCopy());
             }
         }
 
         return new State(copy);
+    }
+
+    ArrayList<ArrayList<Trip>> getState(){
+        return trucks;
     }
 
     private int getDistanceGas(int i, int j) {
