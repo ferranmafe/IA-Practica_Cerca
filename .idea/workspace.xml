@@ -15,8 +15,8 @@
       <file leaf-file-name="Search_generator.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/IA-Search-Project/src/Search_generator.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="333">
-              <caret line="200" column="8" lean-forward="false" selection-start-line="200" selection-start-column="8" selection-end-line="200" selection-end-column="8" />
+            <state relative-caret-position="322">
+              <caret line="206" column="8" lean-forward="true" selection-start-line="206" selection-start-column="8" selection-end-line="206" selection-end-column="8" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="method#enter_search_paramenters#0;class#Search_generator#0" expanded="false" />
@@ -223,12 +223,12 @@
       <option name="presentableId" value="Default" />
       <updated>1508575032741</updated>
       <workItem from="1508575034176" duration="250000" />
-      <workItem from="1508575325699" duration="6632000" />
+      <workItem from="1508575325699" duration="6945000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="6882000" />
+    <option name="totallyTimeSpent" value="7195000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1280" height="800" extended-state="0" />
@@ -283,8 +283,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/IA-Search-Project/src/Search_generator.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="333">
-          <caret line="200" column="8" lean-forward="false" selection-start-line="200" selection-start-column="8" selection-end-line="200" selection-end-column="8" />
+        <state relative-caret-position="322">
+          <caret line="206" column="8" lean-forward="true" selection-start-line="206" selection-start-column="8" selection-end-line="206" selection-end-column="8" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="method#enter_search_paramenters#0;class#Search_generator#0" expanded="false" />

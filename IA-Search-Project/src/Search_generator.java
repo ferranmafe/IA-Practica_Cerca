@@ -1,4 +1,7 @@
 
+import IA.Gasolina.CentrosDistribucion;
+import IA.Gasolina.Gasolineras;
+
 import java.util.Scanner;
 
 import static java.lang.String.valueOf;
@@ -22,7 +25,7 @@ public class Search_generator {
 
         while (command.equals("continue")) {
             enter_search_paramenters();
-            initialize_search_parameters();
+            generate_search();
             command = enter_new_string();
         }
     }
@@ -197,7 +200,10 @@ public class Search_generator {
         System.out.println();
     }
 
-    void initialize_search_parameters() {
+    void generate_search() {
+        CentrosDistribucion centros_distribucion = new CentrosDistribucion(this.distribution_centers_num, this.distrubution_centers_mult, this.distribution_centers_seed);
+        Gasolineras gasolineras = new Gasolineras(this.petrol_stations_num, this.petrol_stations_seed);
+
         
     }
 
