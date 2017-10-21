@@ -37,7 +37,9 @@ public class Trip {
     public Trip getCopy(){
         Order [] copy = new Order[2];
         for (int i = 0; i < 2; ++i){
-            copy[i] = orders[i].getCopy();
+            if (orders[i] != null) {
+                copy[i] = orders[i].getCopy();
+            }
         }
         return new Trip(copy);
     }
