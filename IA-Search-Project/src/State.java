@@ -150,40 +150,54 @@ public class State {
         for (int i = 0; i < ghost; ++i) {
             for (int j = 0; j < 5; ++j) {
                 Order[] orders_to_add = new Order[2];
+                boolean ordersNull = false;
                 if (arrayOrders.size() > 0) {
                     int random_order_1 = randomGenerator.nextInt(arrayOrders.size());
                     orders_to_add[0] = arrayOrders.get(random_order_1);
-                    arrayOrders.remove(random_order_1);
+                    arrayOrders.remove(orders_to_add[0]);
                 } else {
                     orders_to_add[0] = null;
+                    ordersNull = true;
                 }
                 if (arrayOrders.size() > 0) {
                     int random_order_2 = randomGenerator.nextInt(arrayOrders.size());
                     orders_to_add[1] = arrayOrders.get(random_order_2);
-                    arrayOrders.remove(random_order_2);
+                    arrayOrders.remove(orders_to_add[1]);
                 } else {
                     orders_to_add[1] = null;
                 }
-                ArrayList<Trip> truck_trips = trucks.get(i);
-                if (truck_trips.size() < 5) {
-                    truck_trips.add(new Trip(orders_to_add));
+
+                if (trucks.get(i).size() < 5) {
+                    trucks.get(i).add(new Trip(orders_to_add));
                 }
-                else {
+                else if (!ordersNull){
                     trucks.get(ghost).add(new Trip(orders_to_add));
                 }
                 if (sumDistance(i) > 640) {
-                    truck_trips.remove(truck_trips.size() - 1);
-                    trucks.get(ghost).add(new Trip(orders_to_add));
+                    trucks.get(i).remove(orders_to_add);
+                    if (!ordersNull) {
+                        trucks.get(ghost).add(new Trip(orders_to_add));
+                    }
                 }
             }
         }
+        for (int i = arrayOrders.size() - 1; i >= 0; i-= 2) {
+            Order[] o = new Order[2];
+            o[0] = arrayOrders.get(i);
+            if (i - 1 == -1) {
+                o[1] = null;
+            }
+            else {
+                o[1] = arrayOrders.get(i - 1);
+            }
+            trucks.get(ghost).add(new Trip(o));
+        }
 
-        ArrayList<Trip> ghost_trips = trucks.get(ghost);
-        while (ghost_trips.size() < peticiones_totales / 2) {
+        while (trucks.get(ghost).size() < peticiones_totales / 2) {
             Order[] orders_to_add = new Order[2];
             orders_to_add[0] = null;
             orders_to_add[1] = null;
-            ghost_trips.add(new Trip(orders_to_add));
+            trucks.get(ghost).add(new Trip(orders_to_add));
         }
     }
 
