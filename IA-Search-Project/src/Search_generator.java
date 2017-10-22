@@ -5,10 +5,7 @@ import aima.search.framework.*;
 import aima.search.informed.HillClimbingSearch;
 import aima.search.informed.SimulatedAnnealingSearch;
 
-import java.util.Iterator;
-import java.util.List;
-import java.util.Properties;
-import java.util.Scanner;
+import java.util.*;
 
 import static java.lang.String.valueOf;
 
@@ -274,6 +271,8 @@ public class Search_generator {
         System.out.println("Starting to generate the search ...");
 
         try {
+            Date d1,d2;
+            Calendar c1, c2;
             CentrosDistribucion centros_distribucion = new CentrosDistribucion(this.distribution_centers_num, this.distrubution_centers_mult, this.distribution_centers_seed);
             Gasolineras gasolineras = new Gasolineras(this.petrol_stations_num, this.petrol_stations_seed);
 
@@ -319,17 +318,24 @@ public class Search_generator {
             }*/
 
             problem = new Problem(initial_state, successor, new IAGoalTest(), heuristic);
-
-            SearchAgent agent = new SearchAgent(problem, search);
+            d1=new Date();
+            SearchAgent agent = new SearchAgent(problem,search);
+            d2=new Date();
+            c1 = Calendar.getInstance();
+            c2 = Calendar.getInstance();
+            c1.setTime(d1);
+            c2.setTime(d2);
+            long m = c2.getTimeInMillis() - c1.getTimeInMillis();
 
             // We print the results of the search
             System.out.println();
-            printActions(agent.getActions());
+            //printActions(agent.getActions());
             printInstrumentation(agent.getInstrumentation());
 
             // You can access also to the goal state using the
             // method getGoalState of class Search
-            System.out.println(-((State)search.getGoalState()).getHeuristic());
+            System.out.println("Benefits: " + -((State)search.getGoalState()).getHeuristic());
+            System.out.println ("Execution time: " + m + "ms");
         }
         catch (Exception e) {
             e.printStackTrace();

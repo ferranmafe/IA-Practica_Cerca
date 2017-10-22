@@ -38,12 +38,12 @@ public class SuccesorFunction implements SuccessorFunction {
                     // i != ghost or !state.isNullOrder(i,j,k) or nullSwapAllowed
 
                     if (i != trucks.size() - 1 || !state.isNullOrder(i, j, k) || nullSwapAllowed) {
-                        System.out.println("ENTRO!");
+                        //System.out.println("ENTRO!");
                         for (int l = (i == trucks.size() - 1) ? i - 1 : i; l >= 0; --l) {
                             for (int m = 0; m < trucks.get(l).size(); ++m) {
                                 for (int n = 0; n < 2; ++n) {
                                     if (state.canSwap(i, j, k, l, m, n)) {
-                                        System.out.println("Hay swap!");
+                                        //System.out.println("Hay swap!");
                                         State nState = state.getCopy();
                                         nState.swap(i, j, k, l, m, n);
                                         retVal.add(new Successor("", nState));
