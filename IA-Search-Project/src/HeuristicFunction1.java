@@ -12,7 +12,6 @@ public class HeuristicFunction1 implements HeuristicFunction
     }
 
     public double getHeuristicValue(Object state){
-        State aState = (State) state;
         return ((State) state).getHeuristic();
 
     }

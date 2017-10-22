@@ -21,6 +21,7 @@ public class SuccesorFunction implements SuccessorFunction {
         //  sus órdenes por órdenes del camión fantasma, y no tiene sentido que cambie consigo mismo
         //  Cuando un camión hace un cambio consigo mismo, no lo hará con dos órdenes de un mismo viaje (canSwap)
         //  Además se comprueban las distancias y que no sean los dos nulos
+
         boolean nullSwapAllowed, nullSwapDetected;
         nullSwapAllowed = true;
         nullSwapDetected = false;
