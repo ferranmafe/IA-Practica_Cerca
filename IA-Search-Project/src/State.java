@@ -2,6 +2,7 @@ import IA.Gasolina.*;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Random;
 
 public class State {
 
@@ -130,6 +131,59 @@ public class State {
                     k++;
                 }
             }
+        }
+    }
+
+    public void randomTrips() {
+        Random randomGenerator = new Random();
+
+        ArrayList<Order> arrayOrders = new ArrayList<Order>();
+        for (int i = 0; i < gas.size(); ++i) {
+            ArrayList<Integer> gasOrders = gas.get(i).getPeticiones();
+            for (int j = 0; j < gasOrders.size(); ++j) {
+                Order o = new Order(i, j);
+                arrayOrders.add(o);
+            }
+        }
+
+        int peticiones_totales = arrayOrders.size();
+        for (int i = 0; i < trucks.size(); ++i) {
+            for (int j = 0; j < 5; ++j) {
+                Order[] orders_to_add = new Order[2];
+                if (arrayOrders.size() > 0) {
+                    int random_order_1 = randomGenerator.nextInt(arrayOrders.size());
+                    orders_to_add[0] = arrayOrders.get(random_order_1);
+                    arrayOrders.remove(random_order_1);
+                } else {
+                    orders_to_add[0] = null;
+                }
+                if (arrayOrders.size() > 0) {
+                    int random_order_2 = randomGenerator.nextInt(arrayOrders.size());
+                    orders_to_add[1] = arrayOrders.get(random_order_2);
+                    arrayOrders.remove(random_order_2);
+                } else {
+                    orders_to_add[1] = null;
+                }
+                ArrayList<Trip> truck_trips = trucks.get(i);
+                if (truck_trips.size() < 5) {
+                    truck_trips.add(new Trip(orders_to_add));
+                }
+                else {
+                    trucks.get(ghost).add(new Trip(orders_to_add));
+                }
+                if (sumDistance(i) > 640) {
+                    truck_trips.remove(truck_trips.size() - 1);
+                    trucks.get(ghost).add(new Trip(orders_to_add));
+                }
+            }
+        }
+
+        ArrayList<Trip> ghost_trips = trucks.get(ghost);
+        while (ghost_trips.size() < peticiones_totales / 2) {
+            Order[] orders_to_add = new Order[2];
+            orders_to_add[0] = null;
+            orders_to_add[1] = null;
+            ghost_trips.add(new Trip(orders_to_add));
         }
     }
 
