@@ -305,7 +305,9 @@ public class Search_generator {
                 case 0:
                     initial_state.emptyTrips();
                     break;
-
+                case 1:
+                    initial_state.greedyTrips();
+                    break;
                 default:
                     initial_state.emptyTrips();
             }

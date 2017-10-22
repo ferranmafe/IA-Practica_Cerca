@@ -62,7 +62,7 @@ public class State {
             trucks.get(ghost).add(new Trip(o));
         }
 
-        for (int i = 0; i < distr.size(); i++){
+        for (int i = 0; i < ghost; i++){
             for (int j = 0; j < max_trips; j++){
                 Order[] o2 = new Order[2];
                 o2[0] = null;
@@ -71,6 +71,68 @@ public class State {
             }
         }
     }
+
+    public void greedyTrips() {
+        //Rellenamos todos los estados como nulos y luego iteraremos calulando distancias modo greedy y actualizando trips
+        for (int i = 0; i < ghost; i++){
+            for (int j = 0; j < max_trips; j++){
+                Order[] o = new Order[2];
+                o[0] = null;
+                o[1] = null;
+                Order[] o2 = new Order[2];
+                o2[0] = null;
+                o2[1] = null;
+                trucks.get(i).add(new Trip(o));
+                trucks.get(ghost).add(new Trip (o2));
+            }
+        }
+        for (int i = 0; i < gas.size(); ++i) {
+            ArrayList<Integer> gasOrders = gas.get(i).getPeticiones();
+            for (int j = 0; j < gasOrders.size(); ++j) {
+                Order order = new Order(i, j);
+                boolean order_located = false;
+                int k = 0;
+                while (!order_located && k < trucks.size()){
+                    int l = 0;
+                    while (!order_located && l < trucks.get(k).size()){
+                        int m = 0;
+                        while (!order_located && m < 2){
+                            int dist_first_order, dist_second_order;
+                            if (k == ghost){
+                                dist_first_order = 0;
+                                dist_second_order = 0;
+                            }
+                            else if (m == 0){
+                                dist_first_order = (sumDistance(k) + 2 * getDistanceCenter(k, order.getGasStation()));
+                                dist_second_order = 0;
+                            }
+                            else if (trucks.get(k).get(l).getOrder(0) == null){
+                                dist_first_order = 0;
+                                dist_second_order = (sumDistance(k) + 2 * getDistanceCenter(k, order.getGasStation()));
+                            }
+                            else {
+                                dist_first_order = (sumDistance(k) + 2 * getDistanceCenter(k, order.getGasStation()));
+                                dist_second_order = (sumDistance(k) - //Dist total
+                                        getDistanceCenter(k, trucks.get(k).get(l).getOrder(0).getGasStation()) + //La vuelta gasolinera 1 centro distr cuando era orden sola
+                                        getDistanceGas(trucks.get(k).get(l).getOrder(0).getGasStation(), order.getGasStation()) + //Dist entre gasolineras
+                                        getDistanceCenter(k, order.getGasStation())); //Dist gasolinera 2 al centro distribucion
+                            }
+                            //Cuando encontramos un espacio nulo intentamos introducir la orden si cumple la restriccion de distancia
+                            if ((trucks.get(k).get(l).getOrder(m) == null) &&
+                                (k == ghost || (m == 0 && dist_first_order <= max_distance) || (m == 1 && dist_second_order <= max_distance))){
+                                trucks.get(k).get(l).setOrder(order, m);
+                                order_located = true;
+                            }
+                            m++;
+                        }
+                        l++;
+                    }
+                    k++;
+                }
+            }
+        }
+    }
+
 
     //Generar estado inicial
     private void fillTrips() {
@@ -169,7 +231,7 @@ public class State {
     }
 
     private int getDistanceCenter(int i, int j) {
-        return Math.abs(getDistr().get(i).getCoordX() - gas.get(j).getCoordX()) + Math.abs(distr.get(i).getCoordY() - gas.get(j).getCoordY());
+        return Math.abs(distr.get(i).getCoordX() - gas.get(j).getCoordX()) + Math.abs(distr.get(i).getCoordY() - gas.get(j).getCoordY());
     }
 
     private int getDistanceTrip(int i, int j) {
