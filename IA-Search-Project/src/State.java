@@ -155,6 +155,39 @@ public class State {
         trucks.get(l).get(m).setOrder(aux, n);
     }
 
+
+    public void move(int i, int j, int k, int l, int m, int n) {
+        //Hace como el swap pero cambiara una orden nula por una no nula pero lo mira canMove
+        Order aux = trucks.get(i).get(j).changeOrder(trucks.get(l).get(m).getOrder(n), k);
+        trucks.get(l).get(m).setOrder(aux, n);
+    }
+
+    protected boolean canMove(int i, int j, int k, int l, int m, int n) {
+        //Miro que el camion de entrada sea el fantasma i su orden sea no nula y el target del intercambio sea nulo
+        if (i != ghost || trucks.get(i).get(j).getOrder(k) != null || trucks.get(l).get(m).getOrder(n) == null) {
+            return false;
+        }
+
+        //Aqui si era nulo recalculo la dist maxima que tendria dependiendo si la otra orden del trip era nula tambien o no
+        //Si era nula es el doble de la distancia del centro a la gasolineta
+        //Si no era nula quito la vuelta del recorrido anteriro y añado la ditancia entre gasolineras y la nueva vuelta
+        boolean dOk;
+        int dist_tot = 0;
+        int gas_num_new_order = trucks.get(i).get(j).getOrder(k).getGasStation();
+        if (trucks.get(l).get(m).getOrder((n+1)%2) == null){
+            dist_tot = (sumDistance(l) + 2 * getDistanceCenter(l, trucks.get(i).get(j).getOrder(k).getGasStation()));
+        }
+        else {
+            int gas_num_other_order = trucks.get(l).get(m).getOrder((n+1)%2).getGasStation();
+            dist_tot = (sumDistance(l) - //Dist total
+                    getDistanceCenter(l, gas_num_other_order) + //La vuelta gasolinera 1 centro distr cuando era orden sola
+                    getDistanceGas(gas_num_other_order, gas_num_new_order) + //Dist entre gasolineras
+                    getDistanceCenter(l, gas_num_new_order)); //Dist gasolinera 2 al centro distribucion
+
+        }
+        return (i != l || j != m) && (dist_tot < max_distance);
+    }
+
     private int sumDistance(int i){
         int sum = 0;
         for (int j = 0; j < trucks.get(i).size(); ++j){
@@ -162,6 +195,8 @@ public class State {
         }
         return sum;
     }
+
+
 
     protected boolean canSwap(int i, int j, int k, int l, int m, int n) {
         if (trucks.get(i).get(j).getOrder(k) == null && trucks.get(l).get(m).getOrder(n) == null) {
@@ -227,7 +262,7 @@ public class State {
     }
 
     private int getDistanceGas(int i, int j) {
-        return Math.abs(getGas().get(i).getCoordX() - gas.get(j).getCoordX()) + Math.abs(gas.get(i).getCoordY() - gas.get(j).getCoordY());
+        return Math.abs(gas.get(i).getCoordX() - gas.get(j).getCoordX()) + Math.abs(gas.get(i).getCoordY() - gas.get(j).getCoordY());
     }
 
     private int getDistanceCenter(int i, int j) {
