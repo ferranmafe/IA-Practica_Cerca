@@ -25,19 +25,19 @@ public class SuccesorFunction implements SuccessorFunction {
         //  Además se comprueban las distancias y que no sean los dos nulos
 
         boolean nullSwapAllowed, nullSwapDetected;
+        nullSwapAllowed = true;
+        nullSwapDetected = false;
 
         for (int i = trucks.size() - 1; i >= 0; --i){
-            nullSwapAllowed = true;
-            nullSwapDetected = false;
             for (int j = 0; j < trucks.get(i).size(); ++j){
                 for (int k = 0; k < 2; ++k){
                     if (i == trucks.size() - 1 && !nullSwapDetected){
                         nullSwapDetected = state.isNullOrder(i, j, k);
                     }
-                    // state.isNullOrder(i,j,k) -> nullSwapAllowed
-                    // !state.isNullOrder(i,j,k) or nullSwapAllowed
+                    // i = ghost ^ state.isNullOrder(i,j,k) -> nullSwapAllowed
+                    // i != ghost or !state.isNullOrder(i,j,k) or nullSwapAllowed
 
-                    if (!state.isNullOrder(i, j, k) || nullSwapAllowed) {
+                    if (i != trucks.size() - 1 || !state.isNullOrder(i, j, k) || nullSwapAllowed) {
                         System.out.println("ENTRO!");
                         for (int l = (i == trucks.size() - 1) ? i - 1 : i; l >= 0; --l) {
                             for (int m = 0; m < trucks.get(l).size(); ++m) {
