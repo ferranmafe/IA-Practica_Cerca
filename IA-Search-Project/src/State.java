@@ -147,7 +147,7 @@ public class State {
         }
 
         int peticiones_totales = arrayOrders.size();
-        for (int i = 0; i < trucks.size(); ++i) {
+        for (int i = 0; i < ghost; ++i) {
             for (int j = 0; j < 5; ++j) {
                 Order[] orders_to_add = new Order[2];
                 if (arrayOrders.size() > 0) {
