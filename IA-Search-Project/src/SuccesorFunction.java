@@ -3,10 +3,8 @@ import java.util.List;
 
 import aima.search.framework.Successor;
 import aima.search.framework.SuccessorFunction;
-/**
- * @author Javier Bejar
- *
- */
+
+
 public class SuccesorFunction implements SuccessorFunction {
 
 
