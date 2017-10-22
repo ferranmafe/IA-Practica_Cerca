@@ -109,26 +109,36 @@ public class State {
         boolean dOk;
 
         if (i == getGhost()){
-            int d2 = sumDistance(l);
-            if (trucks.get(i).get(j).getOrder(k) == null) dOk = true;
-            else {
-                int d2c1 = getDistanceCenter(l, trucks.get(i).get(m).getOrder(k).getGasStation());
-                int d2c2 = getDistanceCenter(l, trucks.get(l).get(m).getOrder(n).getGasStation());
-                dOk =  d2 - d2c1 + d2c2 < max_distance;
+            if (trucks.get(l).get(m).getOrder(n) == null) {
+                int d2 = sumDistance(l);
+                int d2c1 = getDistanceCenter(l, trucks.get(i).get(j).getOrder(k).getGasStation());
+                dOk = d2+ d2c1 <= max_distance;
             }
-
+            else {
+                dOk = true;
+            }
         }
         else {
-            int d1 = sumDistance(i);
-            int d2 = sumDistance(l);
+            if (trucks.get(i).get(j).getOrder(k) == null) {
+                int d1 = sumDistance(i);
+                int d1c2 = getDistanceCenter(i, trucks.get(l).get(m).getOrder(n).getGasStation());
+                dOk = d1 + d1c2 <= max_distance;
+            } else if (trucks.get(l).get(m).getOrder(n) == null) {
+                int d2 = sumDistance(l);
+                int d2c1 = getDistanceCenter(l, trucks.get(i).get(j).getOrder(k).getGasStation());
+                dOk = d2+ d2c1 <= max_distance;
+            } else{
+                int d1 = sumDistance(i);
+                int d2 = sumDistance(l);
 
-            int d1c1 = getDistanceCenter(i, trucks.get(i).get(j).getOrder(k).getGasStation());
-            int d1c2 = getDistanceCenter(i, trucks.get(l).get(m).getOrder(n).getGasStation());
-            int d2c2 = getDistanceCenter(l, trucks.get(l).get(m).getOrder(n).getGasStation());
-            int d2c1 = getDistanceCenter(l, trucks.get(i).get(m).getOrder(k).getGasStation());
+                int d1c1 = getDistanceCenter(i, trucks.get(i).get(j).getOrder(k).getGasStation());
+                int d1c2 = getDistanceCenter(i, trucks.get(l).get(m).getOrder(n).getGasStation());
+                int d2c2 = getDistanceCenter(l, trucks.get(l).get(m).getOrder(n).getGasStation());
+                int d2c1 = getDistanceCenter(l, trucks.get(i).get(j).getOrder(k).getGasStation());
 
 
-            dOk = d1 - d1c1 + d1c2 <= max_distance && d2 - d2c2 + d2c1 <= max_distance;
+                dOk = d1 - d1c1 + d1c2 <= max_distance && d2 - d2c2 + d2c1 <= max_distance;
+            }
         }
         return (i != l || j != m) && dOk;
     }
@@ -165,7 +175,7 @@ public class State {
     private int getDistanceTrip(int i, int j) {
         if (trucks.get(i).get(j).getOrder(0) != null){
             int firstGas = trucks.get(i).get(j).getOrder(0).getGasStation();
-            if (trucks.get(i).get(j).getOrder(0) != null){
+            if (trucks.get(i).get(j).getOrder(1) != null){
                 int secondGas = trucks.get(i).get(j).getOrder(1).getGasStation();
                 return getDistanceCenter(i, firstGas) + getDistanceGas(firstGas, secondGas) + getDistanceCenter(i, secondGas);
             }
@@ -173,14 +183,14 @@ public class State {
                 return 2 * getDistanceCenter(i, firstGas);
             }
         }
-        else if (trucks.get(i).get(j).getOrder(0) != null){
+        else if (trucks.get(i).get(j).getOrder(1) != null){
             int secondGas = trucks.get(i).get(j).getOrder(1).getGasStation();
             return 2 * getDistanceCenter(i, secondGas);
         }
         return 0;
     }
 
-    public int getBenefits() {
+    private int getBenefits() {
         int benefits = 0;
         for (int i = 0; i < ghost; ++i) {
             for (int j = 0; j < trucks.get(i).size(); ++j) {
@@ -208,7 +218,7 @@ public class State {
         return true;
     }
 
-    public int getCostTravels() {
+    private int getCostTravels() {
         int distance_cost = 0;
         for (int i = 0; i < ghost; ++i) {
             distance_cost += sumDistance(i);
@@ -226,5 +236,9 @@ public class State {
 
     private static int getGhost(){
         return ghost;
+    }
+
+    public int getHeuristic(){
+        return -(getBenefits() - getCostTravels());
     }
 }

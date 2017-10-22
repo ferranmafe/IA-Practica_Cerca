@@ -329,6 +329,7 @@ public class Search_generator {
 
             // You can access also to the goal state using the
             // method getGoalState of class Search
+            System.out.println(-((State)search.getGoalState()).getHeuristic());
         }
         catch (Exception e) {
             e.printStackTrace();
