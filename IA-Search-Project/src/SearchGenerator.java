@@ -349,7 +349,7 @@ public class SearchGenerator {
                 System.out.println();
             }
         }
-        
+
     }
 
 
