@@ -1,7 +1,6 @@
-
 import aima.search.framework.HeuristicFunction;
 
-public class HeuristicFunction1 implements HeuristicFunction
+public class HeuristicFunction2 implements HeuristicFunction
 {
     public boolean equals(Object obj)
     {
@@ -12,7 +11,8 @@ public class HeuristicFunction1 implements HeuristicFunction
     }
 
     public double getHeuristicValue(Object state){
-        return ((State) state).getHeuristic1();
+        return ((State) state).getHeuristic2();
 
     }
 }
+

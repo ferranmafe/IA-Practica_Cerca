@@ -147,6 +147,8 @@ public class State {
         }
 
         int peticiones_totales = arrayOrders.size();
+        int nulls = 0;
+        int no_nulls = 0;
         for (int i = 0; i < ghost; ++i) {
             for (int j = 0; j < 5; ++j) {
                 Order[] orders_to_add = new Order[2];
@@ -155,16 +157,20 @@ public class State {
                     int random_order_1 = randomGenerator.nextInt(arrayOrders.size());
                     orders_to_add[0] = arrayOrders.get(random_order_1);
                     arrayOrders.remove(orders_to_add[0]);
+                    ++no_nulls;
                 } else {
                     orders_to_add[0] = null;
                     ordersNull = true;
+                    ++nulls;
                 }
                 if (arrayOrders.size() > 0) {
                     int random_order_2 = randomGenerator.nextInt(arrayOrders.size());
                     orders_to_add[1] = arrayOrders.get(random_order_2);
                     arrayOrders.remove(orders_to_add[1]);
+                    ++no_nulls;
                 } else {
                     orders_to_add[1] = null;
+                    ++nulls;
                 }
 
                 if (trucks.get(i).size() < 5) {
@@ -175,20 +181,30 @@ public class State {
                 }
                 if (sumDistance(i) > 640) {
                     trucks.get(i).remove(orders_to_add);
-                    if (!ordersNull) {
-                        trucks.get(ghost).add(new Trip(orders_to_add));
-                    }
+                    trucks.get(ghost).add(new Trip(orders_to_add));
                 }
             }
         }
+        int null_orders = 0;
+        int not_null_orders = 0;
+        for (int i = 0; i < trucks.size(); ++i) {
+            for (int j = 0; j < trucks.get(i).size(); ++j) {
+                Order[] orders = trucks.get(i).get(j).getOrders();
+                if (orders[0] != null) ++not_null_orders;
+                else ++null_orders;
+            }
+        }
+
         for (int i = arrayOrders.size() - 1; i >= 0; i-= 2) {
             Order[] o = new Order[2];
             o[0] = arrayOrders.get(i);
             if (i - 1 == -1) {
                 o[1] = null;
+                ++nulls;
             }
             else {
                 o[1] = arrayOrders.get(i - 1);
+                ++nulls;
             }
             trucks.get(ghost).add(new Trip(o));
         }
@@ -197,8 +213,14 @@ public class State {
             Order[] orders_to_add = new Order[2];
             orders_to_add[0] = null;
             orders_to_add[1] = null;
+            nulls += 2;
             trucks.get(ghost).add(new Trip(orders_to_add));
         }
+
+
+        System.out.println(peticiones_totales);
+        System.out.println(null_orders);
+        System.out.println(not_null_orders);
     }
 
 
@@ -404,11 +426,37 @@ public class State {
         return distance_cost * 2;
     }
 
+    private int getLosses() {
+        int losses = 0;
+        for (int i = 0; i < trucks.get(ghost).size(); ++i) {
+            for (int j = 0; j < 2; ++j) {
+                Order order = trucks.get(ghost).get(i).getOrder(j);
+                if (order != null) {
+                    int gas_station_num = order.getGasStation();
+                    int order_num = order.getNumOrder();
+                    int dias_peticion = gas.get(gas_station_num).getPeticiones().get(order_num);
+                    int percentatge_over_total;
+                    int percentatge_over_total_tomorrow;
+                    if (dias_peticion == 0) {
+                        percentatge_over_total = 102;
+                    } else {
+                        percentatge_over_total = (int) (100 - Math.pow((double) 2, (double) dias_peticion));
+                    }
+                    percentatge_over_total_tomorrow = (int) (100 - Math.pow((double) 2, (double) (dias_peticion + 1.0)));
+                    losses += (1000 * (percentatge_over_total) / 100) - (1000 * (percentatge_over_total_tomorrow) / 100);
+                }
+            }
+        }
+        return losses;
+    }
+
     private static int getGhost(){
         return ghost;
     }
 
-    public int getHeuristic(){
+    public int getHeuristic1(){
         return -(getBenefits() - getCostTravels());
     }
+
+    public int getHeuristic2() { return -(getBenefits() - (getCostTravels() + getLosses()));}
 }

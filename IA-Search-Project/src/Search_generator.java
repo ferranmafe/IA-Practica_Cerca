@@ -285,7 +285,9 @@ public class Search_generator {
                 case 0:
                     heuristic = new HeuristicFunction1();
                     break;
-
+                case 1:
+                    heuristic = new HeuristicFunction2();
+                    break;
                 default:
                     heuristic = new HeuristicFunction1();
             }
@@ -339,7 +341,9 @@ public class Search_generator {
 
             // You can access also to the goal state using the
             // method getGoalState of class Search
-            System.out.println("Benefits: " + -((State)search.getGoalState()).getHeuristic());
+            System.out.println("Benefits: " + -((State)search.getGoalState()).getHeuristic1());
+            System.out.println("Benefits (with losses): " + -((State)search.getGoalState()).getHeuristic2());
+
             System.out.println ("Execution time: " + m + "ms");
         }
         catch (Exception e) {
