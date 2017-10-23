@@ -181,7 +181,7 @@ public class SearchGenerator {
             }
 
             try {
-                this.initial_distribution = Integer.parseInt(parts[2]);
+                this.initial_distribution = Integer.parseInt(parts[8]);
                 if (this.initial_distribution < 0 || this.initial_distribution >= this.NUMBER_INITIAL_DISTRIBUTIONS) {
                     validCommand = false;
                 }
@@ -231,7 +231,9 @@ public class SearchGenerator {
                 case 0:
                     successor = new SuccesorFunction();
                     break;
-
+                case 1:
+                    successor = new SuccesorFunction2();
+                    break;
                 default:
                     successor = new SuccesorFunction();
             }
