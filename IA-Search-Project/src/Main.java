@@ -6,19 +6,19 @@ public class Main {
         System.out.println("Hi!");
         System.out.println("Welcome to the " + '"' + "Petrol Stations Path Generator 2.0" + '"' + ", the best path planner generator in this square metre :)");
         System.out.println();
-        System.out.println("To start using the program, type " + '"' + "start" + '"' + ". Otherwhise, type " + '"' + "exit" + '"' + ":");
+        System.out.println("To start using the program, type " + '"' + "start" + '"' + ". For the fast usage, type " + '"' + "fast start" + '"' +". Otherwhise, type " + '"' + "exit" + '"' + ":");
 
         Scanner sc = new Scanner(System.in);
         String command = sc.nextLine();
 
-        while (!command.equals("start") && !command.equals("exit")) {
+        while (!command.equals("start") && !command.equals("exit") && !command.equals("fast start")) {
             System.out.println();
             System.out.println("Wrong command. Please, try again:");
             command = sc.nextLine();
         }
-        if (command.equals("start")) {
+        if (command.equals("start") || command.equals("fast start")) {
             System.out.println();
-            Search_generator search_generator = new Search_generator();
+            SearchGenerator search_generator = new SearchGenerator(command);
         }
         System.out.println("Bye! :D");
     }

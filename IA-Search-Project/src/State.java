@@ -459,4 +459,10 @@ public class State {
     }
 
     public int getHeuristic2() { return -(getBenefits() - (getCostTravels() + getLosses()));}
+
+    public int getHeuristic3() {return -(2 * getBenefits() - (getCostTravels() + getLosses()));}
+
+    public int getHeuristic4() {return -(getBenefits() - (2 * getCostTravels() + getLosses()));}
+
+    public int getHeuristic5() {return -(getBenefits() - (getCostTravels() + 2 * getLosses()));}
 }

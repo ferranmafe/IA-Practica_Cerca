@@ -9,7 +9,7 @@ import java.util.*;
 
 import static java.lang.String.valueOf;
 
-public class Search_generator {
+public class SearchGenerator {
 
     private String local_search_algorithm;
     private int heuristic_function;
@@ -23,21 +23,29 @@ public class Search_generator {
     private int petrol_stations_num;
     private int petrol_stations_seed;
 
-    private static final int NUMBER_HEURISTICS = 3;
+    private static final int NUMBER_HEURISTICS = 5;
     private static final int NUMBER_SUCCESSORS = 3;
     private static final int NUMBER_INITIAL_DISTRIBUTIONS = 3;
 
-    Search_generator() {
+    SearchGenerator(String start_command) {
         String command = "continue";
-
-        while (command.equals("continue")) {
-            enter_search_paramenters();
-            generate_search();
-            command = enter_new_string();
+        if (start_command.equals("start")) {
+            while (command.equals("continue")) {
+                enter_search_parameters();
+                generate_search();
+                command = enter_new_string();
+            }
+        }
+        else if (start_command.equals("fast start")) {
+            while (command.equals("continue")) {
+                enter_search_parameters_one_line();
+                generate_search();
+                command = enter_new_string();
+            }
         }
     }
 
-    void enter_search_paramenters() {
+    void enter_search_parameters() {
 
         //Algorithm that we are going to use
         String command = "";
@@ -58,7 +66,7 @@ public class Search_generator {
         //Heuristic that we are going to use
         command = "info";
         while (command.equals("info")) {
-            System.out.println("Enter the kind of heuristic that you want to use (number between [0 - " + valueOf(NUMBER_HEURISTICS) +"]). If you don't know the heuristic that you can use, type " + '"' + "info" + '"' + ":");
+            System.out.println("Enter the kind of heuristic that you want to use (number between [0 - " + (valueOf(NUMBER_HEURISTICS - 1)) +"]). If you don't know the heuristic that you can use, type " + '"' + "info" + '"' + ":");
             command = enter_new_string();
 
             if (command.equals("info")) {
@@ -89,7 +97,7 @@ public class Search_generator {
         //Successors function that we are going to use
         command = "info";
         while (command.equals("info")) {
-            System.out.println("Enter the kind of successors that you want to use (number between [0 - " + valueOf(NUMBER_SUCCESSORS) +"]). If you don't know the successors that you can use, type " + '"' + "info" + '"' + ":");
+            System.out.println("Enter the kind of successors that you want to use (number between [0 - " + valueOf(NUMBER_SUCCESSORS - 1) +"]). If you don't know the successors that you can use, type " + '"' + "info" + '"' + ":");
             command = enter_new_string();
 
             if (command.equals("info")) {
@@ -239,7 +247,7 @@ public class Search_generator {
         //Heuristic that we are going to use
         command = "info";
         while (command.equals("info")) {
-            System.out.println("Enter the initial distribution that you want to use (number between [0 - " + valueOf(NUMBER_INITIAL_DISTRIBUTIONS) +"]). If you don't know the initial distributions that you can use, type " + '"' + "info" + '"' + ":");
+            System.out.println("Enter the initial distribution that you want to use (number between [0 - " + valueOf(NUMBER_INITIAL_DISTRIBUTIONS - 1) +"]). If you don't know the initial distributions that you can use, type " + '"' + "info" + '"' + ":");
             command = enter_new_string();
 
             if (command.equals("info")) {
@@ -267,6 +275,106 @@ public class Search_generator {
         System.out.println();
     }
 
+    void enter_search_parameters_one_line() {
+        boolean validCommand = false;
+        while (!validCommand) {
+            validCommand = true;
+            System.out.println("Usage: [Algorithm] [Heuristic] [Successors function] [DC num] [DC mult] [DC seed] [PS num] [PS seed] [initial distribution]");
+            String command = enter_new_string();
+            String[] parts = command.split(" ");
+
+            if (!parts[0].equals("HC") && !parts[0].equals("SA")) {
+                validCommand = false;
+            }
+            else this.local_search_algorithm = parts[0];
+
+            try {
+                this.heuristic_function = Integer.parseInt(parts[1]);
+                if (this.heuristic_function < 0 || this.heuristic_function >= this.NUMBER_HEURISTICS) {
+                    validCommand = false;
+                }
+            }
+            catch (Exception e) {
+                validCommand = false;
+            }
+
+            try {
+                this.successors_function = Integer.parseInt(parts[2]);
+                if (this.successors_function < 0 || this.successors_function >= this.NUMBER_SUCCESSORS) {
+                    validCommand = false;
+                }
+            }
+            catch (Exception e) {
+                validCommand = false;
+            }
+
+            try {
+                this.distribution_centers_num = Integer.parseInt(parts[3]);
+                if (this.distribution_centers_num < 0) {
+                    validCommand = false;
+                }
+            }
+            catch (Exception e) {
+                validCommand = false;
+            }
+
+            try {
+                this.distrubution_centers_mult = Integer.parseInt(parts[4]);
+                if (this.distrubution_centers_mult < 0) {
+                    validCommand = false;
+                }
+            }
+            catch (Exception e) {
+                validCommand = false;
+            }
+
+            try {
+                this.distribution_centers_seed = Integer.parseInt(parts[5]);
+                if (this.distribution_centers_seed < 0) {
+                    validCommand = false;
+                }
+            }
+            catch (Exception e) {
+                validCommand = false;
+            }
+
+            try {
+                this.petrol_stations_num = Integer.parseInt(parts[6]);
+                if (this.petrol_stations_num < 0) {
+                    validCommand = false;
+                }
+            }
+            catch (Exception e) {
+                validCommand = false;
+            }
+
+            try {
+                this.petrol_stations_seed = Integer.parseInt(parts[7]);
+                if (this.petrol_stations_seed < 0) {
+                    validCommand = false;
+                }
+            }
+            catch (Exception e) {
+                validCommand = false;
+            }
+
+            try {
+                this.initial_distribution = Integer.parseInt(parts[2]);
+                if (this.initial_distribution < 0 || this.initial_distribution >= this.NUMBER_INITIAL_DISTRIBUTIONS) {
+                    validCommand = false;
+                }
+            }
+            catch (Exception e) {
+                validCommand = false;
+            }
+
+            if (!validCommand) {
+                System.out.println();
+                System.out.println("Wrong command. Please, try again.");
+            }
+        }
+    }
+
     void generate_search() {
         System.out.println("Starting to generate the search ...");
 
@@ -288,6 +396,16 @@ public class Search_generator {
                 case 1:
                     heuristic = new HeuristicFunction2();
                     break;
+                case 2:
+                    heuristic = new HeuristicFunction3();
+                    break;
+                case 3:
+                    heuristic = new HeuristicFunction4();
+                    break;
+                case 4:
+                    heuristic = new HeuristicFunction5();
+                    break;
+
                 default:
                     heuristic = new HeuristicFunction1();
             }
@@ -377,8 +495,11 @@ public class Search_generator {
 
     void show_heuristics_info() {
         System.out.println("These are the kind of heuristic that you can use:");
-        System.out.println("0 ->");
-        System.out.println("1 ->");
+        System.out.println("0 -> Heuristic that only takes into consideration the benefits and the travel costs");
+        System.out.println("1 -> Heuristic that takes into consideration the benefits, the travel costs and the losses");
+        System.out.println("2 -> Heuristic that works like heuristic 1 but giving more importance to the benefits");
+        System.out.println("3 -> Heuristic that works like heuristic 1 but giving more importance to the travel costs");
+        System.out.println("4 -> Heuristic that works like heuristic 1 but giving more importance to the losses");
         System.out.println();
 
     }
