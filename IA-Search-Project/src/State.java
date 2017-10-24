@@ -287,7 +287,6 @@ public class State {
     }
 
 
-
     protected boolean canSwap(int i, int j, int k, int l, int m, int n) {
         if (trucks.get(i).get(j).getOrder(k) == null && trucks.get(l).get(m).getOrder(n) == null) {
             return false;
@@ -326,6 +325,58 @@ public class State {
             nd2 = (compOrder2 == null) ? d2 + 2 * (d2g1 - d2g2) :
                     d2 - getDistanceCenter(l, compOrder2.getGasStation()) +
                     getDistanceGas(compOrder2.getGasStation(), order1.getGasStation()) + d2g1;
+            dOk = nd2 <= max_distance;
+        }
+
+        else {
+            nd1 = (compOrder1 == null) ? d1 + 2 * (d1g2 - d1g1) :
+                    d1 - d1g1 - getDistanceGas(order1.getGasStation(), compOrder1.getGasStation())
+                            + getDistanceGas(compOrder1.getGasStation(), order2.getGasStation()) + d1g2;
+            nd2 = (compOrder2 == null) ? d2 + 2 * (d2g1 - d2g2) :
+                    d2 - d2g2 - getDistanceGas(order2.getGasStation(), compOrder2.getGasStation()) +
+                            getDistanceGas(compOrder2.getGasStation(), order1.getGasStation()) + d2g1;
+            dOk = (nd1 <= max_distance || i == ghost) && nd2 <= max_distance;
+        }
+
+
+        return (i != l || j != m) && dOk;
+    }
+
+    protected boolean canSwap2(int i, int j, int k, int l, int m, int n) {
+        if (trucks.get(i).get(j).getOrder(k) == null || trucks.get(l).get(m).getOrder(n) == null) {
+            return true;
+        }
+        Order order1 = trucks.get(i).get(j).getOrder(k);
+        Order order2 = trucks.get(l).get(m).getOrder(n);
+        Order compOrder1 = trucks.get(i).get(j).getOrder(1-k);
+        Order compOrder2 = trucks.get(l).get(m).getOrder(1-n);
+
+        int d1 = (i == ghost) ? 0 : sumDistance(i);
+        int d2 = sumDistance(l);
+
+        int d1g1 = (order1 == null || i == ghost) ? 0 : getDistanceCenter(i, order1.getGasStation());
+        int d1g2 = (order2 == null || i == ghost) ? 0 : getDistanceCenter(i, order2.getGasStation());
+        int d2g1 = (order1 == null) ? 0 : getDistanceCenter(l, order1.getGasStation());
+        int d2g2 = (order2 == null) ? 0 : getDistanceCenter(l, order2.getGasStation());
+
+
+        int nd1;
+        int nd2;
+
+        if (order1 == null){
+            if (i == ghost) dOk = true;
+            else {
+                nd1 = (compOrder1 == null) ? d1 + 2 * d1g2 :
+                        d1 - getDistanceCenter(i, compOrder1.getGasStation())
+                                + getDistanceGas(compOrder1.getGasStation(), order2.getGasStation()) + d1g2;
+                dOk = nd1 <= max_distance;
+            }
+        }
+
+        else if (order2 == null){
+            nd2 = (compOrder2 == null) ? d2 + 2 * (d2g1 - d2g2) :
+                    d2 - getDistanceCenter(l, compOrder2.getGasStation()) +
+                            getDistanceGas(compOrder2.getGasStation(), order1.getGasStation()) + d2g1;
             dOk = nd2 <= max_distance;
         }
 
