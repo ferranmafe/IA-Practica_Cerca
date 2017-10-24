@@ -254,7 +254,7 @@ public class State {
 
     protected boolean canMove(int i, int j, int k, int l, int m, int n) {
         //Miro que el camion de entrada sea el fantasma i su orden sea no nula y el target del intercambio sea nulo
-        if (i != ghost || trucks.get(i).get(j).getOrder(k) != null || trucks.get(l).get(m).getOrder(n) == null) {
+        if (i != ghost || trucks.get(i).get(j).getOrder(k) == null || trucks.get(l).get(m).getOrder(n) != null) {
             return false;
         }
 
@@ -291,7 +291,14 @@ public class State {
         if (trucks.get(i).get(j).getOrder(k) == null && trucks.get(l).get(m).getOrder(n) == null) {
             return false;
         }
+        /*
 
+        WORSE, SLOWER VERSION
+
+        swap(i, j, k, l, m, n);
+        boolean dOk = (i == ghost || sumDistance(i) <= max_distance) && sumDistance(l) <= max_distance;
+        swap(i, j, k, l, m, n);
+        */
         boolean dOk;
 
         Order order1 = trucks.get(i).get(j).getOrder(k);
@@ -337,7 +344,6 @@ public class State {
                             getDistanceGas(compOrder2.getGasStation(), order1.getGasStation()) + d2g1;
             dOk = (nd1 <= max_distance || i == ghost) && nd2 <= max_distance;
         }
-
 
         return (i != l || j != m) && dOk;
     }
