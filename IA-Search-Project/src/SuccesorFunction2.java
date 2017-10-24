@@ -29,7 +29,9 @@ public class SuccesorFunction2 implements SuccessorFunction {
                                 if (state.canMove(i, j, k, l, m, n)){
                                     State nState = state.getCopy();
                                     nState.move(i, j, k, l, m, n);
-                                    retVal.add(new Successor("", nState));
+                                    retVal.add(new Successor(
+                                        "Move: (" + i + ", " + j + ", " + k + ") -> (" + l + ", " + m + ", " + n + ")",
+                                        nState));
                                     inserted = true;
                                     break;
                                 }

@@ -75,18 +75,8 @@ public class State {
 
     public void greedyTrips() {
         //Rellenamos todos los estados como nulos y luego iteraremos calulando distancias modo greedy y actualizando trips
-        for (int i = 0; i < ghost; i++){
-            for (int j = 0; j < max_trips; j++){
-                Order[] o = new Order[2];
-                o[0] = null;
-                o[1] = null;
-                Order[] o2 = new Order[2];
-                o2[0] = null;
-                o2[1] = null;
-                trucks.get(i).add(new Trip(o));
-                trucks.get(ghost).add(new Trip (o2));
-            }
-        }
+        initializeStateToNull();
+
         for (int i = 0; i < gas.size(); ++i) {
             ArrayList<Integer> gasOrders = gas.get(i).getPeticiones();
             for (int j = 0; j < gasOrders.size(); ++j) {
@@ -120,7 +110,7 @@ public class State {
                             }
                             //Cuando encontramos un espacio nulo intentamos introducir la orden si cumple la restriccion de distancia
                             if ((trucks.get(k).get(l).getOrder(m) == null) &&
-                                (k == ghost || (m == 0 && dist_first_order <= max_distance) || (m == 1 && dist_second_order <= max_distance))){
+                                    (k == ghost || (m == 0 && dist_first_order <= max_distance) || (m == 1 && dist_second_order <= max_distance))){
                                 trucks.get(k).get(l).setOrder(order, m);
                                 order_located = true;
                             }
@@ -135,98 +125,46 @@ public class State {
     }
 
     public void randomTrips() {
+        initializeStateToNull();
         Random randomGenerator = new Random();
-
         ArrayList<Order> arrayOrders = new ArrayList<Order>();
         for (int i = 0; i < gas.size(); ++i) {
             ArrayList<Integer> gasOrders = gas.get(i).getPeticiones();
             for (int j = 0; j < gasOrders.size(); ++j) {
                 Order o = new Order(i, j);
-                arrayOrders.add(o);
-            }
-        }
-
-        int peticiones_totales = arrayOrders.size();
-        int nulls = 0;
-        int no_nulls = 0;
-        for (int i = 0; i < ghost; ++i) {
-            for (int j = 0; j < 5; ++j) {
-                Order[] orders_to_add = new Order[2];
-                boolean ordersNull = false;
-                if (arrayOrders.size() > 0) {
-                    int random_order_1 = randomGenerator.nextInt(arrayOrders.size());
-                    orders_to_add[0] = arrayOrders.get(random_order_1);
-                    arrayOrders.remove(orders_to_add[0]);
-                    ++no_nulls;
-                } else {
-                    orders_to_add[0] = null;
-                    ordersNull = true;
-                    ++nulls;
-                }
-                if (arrayOrders.size() > 0) {
-                    int random_order_2 = randomGenerator.nextInt(arrayOrders.size());
-                    orders_to_add[1] = arrayOrders.get(random_order_2);
-                    arrayOrders.remove(orders_to_add[1]);
-                    ++no_nulls;
-                } else {
-                    orders_to_add[1] = null;
-                    ++nulls;
+                boolean order_allocated = false;
+                while (!order_allocated){
+                    int l = randomGenerator.nextInt(trucks.size());
+                    int m = randomGenerator.nextInt(trucks.get(l).size());
+                    int n = randomGenerator.nextInt(2);
+                    if (trucks.get(l).get(m).getOrder(n) == null && isAllowedDistance(l, m, n, o)){
+                        trucks.get(l).get(m).setOrder(o, n);
+                        order_allocated = true;
+                    }
                 }
 
-                if (trucks.get(i).size() < 5) {
-                    trucks.get(i).add(new Trip(orders_to_add));
-                }
-                else if (!ordersNull){
-                    trucks.get(ghost).add(new Trip(orders_to_add));
-                }
-                if (sumDistance(i) > 640) {
-                    trucks.get(i).remove(orders_to_add);
-                    trucks.get(ghost).add(new Trip(orders_to_add));
-                }
             }
         }
-        int null_orders = 0;
-        int not_null_orders = 0;
-        for (int i = 0; i < trucks.size(); ++i) {
-            for (int j = 0; j < trucks.get(i).size(); ++j) {
-                Order[] orders = trucks.get(i).get(j).getOrders();
-                if (orders[0] != null) ++not_null_orders;
-                else ++null_orders;
-            }
-        }
-
-        for (int i = arrayOrders.size() - 1; i >= 0; i-= 2) {
-            Order[] o = new Order[2];
-            o[0] = arrayOrders.get(i);
-            if (i - 1 == -1) {
-                o[1] = null;
-                ++nulls;
-            }
-            else {
-                o[1] = arrayOrders.get(i - 1);
-                ++nulls;
-            }
-            trucks.get(ghost).add(new Trip(o));
-        }
-
-        while (trucks.get(ghost).size() < peticiones_totales / 2) {
-            Order[] orders_to_add = new Order[2];
-            orders_to_add[0] = null;
-            orders_to_add[1] = null;
-            nulls += 2;
-            trucks.get(ghost).add(new Trip(orders_to_add));
-        }
-
-
-        System.out.println(peticiones_totales);
-        System.out.println(null_orders);
-        System.out.println(not_null_orders);
     }
 
-
-    //Generar estado inicial
-    private void fillTrips() {
-
+    protected  void initializeStateToNull() {
+        for (int i = 0; i < ghost; i++){
+            for (int j = 0; j < max_trips; j++){
+                Order[] o = new Order[2];
+                o[0] = null;
+                o[1] = null;
+                trucks.get(i).add(new Trip(o));
+            }
+        }
+        for (int i = 0; i < gas.size(); ++i) {
+            ArrayList<Integer> gasOrders = gas.get(i).getPeticiones();
+            for (int j = 0; j < gasOrders.size(); ++j) {
+                Order[] o = new Order[2];
+                o[0] = null;
+                o[1] = null;
+                trucks.get(ghost).add(new Trip(o));
+            }
+        }
     }
 
     public void swap(int i, int j, int k, int l, int m, int n) {
@@ -262,7 +200,7 @@ public class State {
         //Si era nula es el doble de la distancia del centro a la gasolineta
         //Si no era nula quito la vuelta del recorrido anteriro y añado la ditancia entre gasolineras y la nueva vuelta
         boolean dOk;
-        int dist_tot = 0;
+        /*int dist_tot = 0;
         int gas_num_new_order = trucks.get(i).get(j).getOrder(k).getGasStation();
         if (trucks.get(l).get(m).getOrder((n+1)%2) == null){
             dist_tot = (sumDistance(l) + 2 * getDistanceCenter(l, trucks.get(i).get(j).getOrder(k).getGasStation()));
@@ -276,10 +214,18 @@ public class State {
 
         }
         return (i != l || j != m) && (dist_tot < max_distance);
+        */
+
+        dOk = isAllowedSwapDistance(i, j, k, l, m, n);
+
+        return (i != l || j != m) && dOk;
     }
 
     private int sumDistance(int i){
         int sum = 0;
+        if (i == ghost){
+            return 0;
+        }
         for (int j = 0; j < trucks.get(i).size(); ++j){
             sum += getDistanceTrip(i, j);
         }
@@ -292,66 +238,35 @@ public class State {
             return false;
         }
         /*
-
         WORSE, SLOWER VERSION
-
         swap(i, j, k, l, m, n);
         boolean dOk = (i == ghost || sumDistance(i) <= max_distance) && sumDistance(l) <= max_distance;
         swap(i, j, k, l, m, n);
         */
-        boolean dOk;
-
-        Order order1 = trucks.get(i).get(j).getOrder(k);
-        Order order2 = trucks.get(l).get(m).getOrder(n);
-        Order compOrder1 = trucks.get(i).get(j).getOrder(1-k);
-        Order compOrder2 = trucks.get(l).get(m).getOrder(1-n);
-
-        int d1 = (i == ghost) ? 0 : sumDistance(i);
-        int d2 = sumDistance(l);
-
-        int d1g1 = (order1 == null || i == ghost) ? 0 : getDistanceCenter(i, order1.getGasStation());
-        int d1g2 = (order2 == null || i == ghost) ? 0 : getDistanceCenter(i, order2.getGasStation());
-        int d2g1 = (order1 == null) ? 0 : getDistanceCenter(l, order1.getGasStation());
-        int d2g2 = (order2 == null) ? 0 : getDistanceCenter(l, order2.getGasStation());
-
-
-        int nd1;
-        int nd2;
-
-        if (order1 == null){
-            if (i == ghost) dOk = true;
-            else {
-                nd1 = (compOrder1 == null) ? d1 + 2 * d1g2 :
-                        d1 - getDistanceCenter(i, compOrder1.getGasStation())
-                                + getDistanceGas(compOrder1.getGasStation(), order2.getGasStation()) + d1g2;
-                dOk = nd1 <= max_distance;
-            }
-        }
-
-        else if (order2 == null){
-            nd2 = (compOrder2 == null) ? d2 + 2 * (d2g1 - d2g2) :
-                    d2 - getDistanceCenter(l, compOrder2.getGasStation()) +
-                    getDistanceGas(compOrder2.getGasStation(), order1.getGasStation()) + d2g1;
-            dOk = nd2 <= max_distance;
-        }
-
-        else {
-            nd1 = (compOrder1 == null) ? d1 + 2 * (d1g2 - d1g1) :
-                    d1 - d1g1 - getDistanceGas(order1.getGasStation(), compOrder1.getGasStation())
-                            + getDistanceGas(compOrder1.getGasStation(), order2.getGasStation()) + d1g2;
-            nd2 = (compOrder2 == null) ? d2 + 2 * (d2g1 - d2g2) :
-                    d2 - d2g2 - getDistanceGas(order2.getGasStation(), compOrder2.getGasStation()) +
-                            getDistanceGas(compOrder2.getGasStation(), order1.getGasStation()) + d2g1;
-            dOk = (nd1 <= max_distance || i == ghost) && nd2 <= max_distance;
-        }
-
+        boolean dOk = isAllowedSwapDistance(i, j, k, l, m, n);
         return (i != l || j != m) && dOk;
     }
 
     protected boolean canSwap2(int i, int j, int k, int l, int m, int n) {
         if (trucks.get(i).get(j).getOrder(k) == null || trucks.get(l).get(m).getOrder(n) == null) {
-            return true;
+            return false;
         }
+        boolean dOk = isAllowedSwapDistance(i, j, k, l, m, n);
+        return (i != l || j != m) && dOk;
+    }
+
+    protected boolean canMove2(int i, int j, int k, int l, int m, int n){
+        if (trucks.get(i).get(j).getOrder(k) == null || trucks.get(l).get(m).getOrder(n) != null) {
+            return false;
+        }
+        boolean dOk = isAllowedSwap2Distance(i, j, k, l, m, n);
+        return (i != l || j != m) && dOk;
+
+
+    }
+
+    protected boolean isAllowedSwapDistance(int i, int j, int k, int l, int m, int n){
+        boolean dOk;
         Order order1 = trucks.get(i).get(j).getOrder(k);
         Order order2 = trucks.get(l).get(m).getOrder(n);
         Order compOrder1 = trucks.get(i).get(j).getOrder(1-k);
@@ -395,10 +310,68 @@ public class State {
                             getDistanceGas(compOrder2.getGasStation(), order1.getGasStation()) + d2g1;
             dOk = (nd1 <= max_distance || i == ghost) && nd2 <= max_distance;
         }
-
-
-        return (i != l || j != m) && dOk;
+        return dOk;
     }
+
+    protected boolean isAllowedDistance(int i, int j, int k, Order o){
+        Order order1 = o;
+        Order compOrder1 = trucks.get(i).get(j).getOrder(1-k);
+        int d1 = (i == ghost) ? 0 : sumDistance(i);
+        int d1g1 = (order1 == null || i == ghost) ? 0 : getDistanceCenter(i, order1.getGasStation());
+        int d1g2 = (compOrder1 == null ||i == ghost) ? 0 : getDistanceCenter(i, compOrder1.getGasStation());
+        int nd1 = (compOrder1 == null) ? d1 + 2 * d1g1 :
+                d1 - d1g2 + getDistanceGas(compOrder1.getGasStation(), order1.getGasStation()) + d1g1;
+        return (nd1 <= max_distance || i == ghost);
+    }
+
+    protected boolean isAllowedSwap2Distance(int i, int j, int k, int l, int m, int n){
+        boolean dOk;
+        Order order1 = trucks.get(i).get(j).getOrder(k);
+        Order order2 = trucks.get(l).get(m).getOrder(n);
+        Order compOrder1 = trucks.get(i).get(j).getOrder(1-k);
+        Order compOrder2 = trucks.get(l).get(m).getOrder(1-n);
+
+        int d1 = (i == ghost) ? 0 : sumDistance(i);
+        int d2 = sumDistance(l);
+
+        int d1g1 = (order1 == null || i == ghost) ? 0 : getDistanceCenter(i, order1.getGasStation());
+        int d1g2 = (order2 == null || i == ghost) ? 0 : getDistanceCenter(i, order2.getGasStation());
+        int d2g1 = (order1 == null) ? 0 : getDistanceCenter(l, order1.getGasStation());
+        int d2g2 = (order2 == null) ? 0 : getDistanceCenter(l, order2.getGasStation());
+
+
+        int nd1;
+        int nd2;
+
+        if (order1 == null){
+            if (i == ghost) dOk = true;
+            else {
+                nd1 = (compOrder1 == null) ? d1 + 2 * d1g2 :
+                        d1 - getDistanceCenter(i, compOrder1.getGasStation())
+                                + getDistanceGas(compOrder1.getGasStation(), order2.getGasStation()) + d1g2;
+                dOk = nd1 <= max_distance;
+            }
+        }
+
+        else if (order2 == null){
+            nd2 = (compOrder2 == null) ? d2 + 2 * (d2g1 - d2g2) :
+                    d2 - getDistanceCenter(l, compOrder2.getGasStation()) +
+                            getDistanceGas(compOrder2.getGasStation(), order1.getGasStation()) + d2g1;
+            dOk = nd2 <= max_distance;
+        }
+
+        else {
+            nd1 = (compOrder1 == null) ? d1 + 2 * (d1g2 - d1g1) :
+                    d1 - d1g1 - getDistanceGas(order1.getGasStation(), compOrder1.getGasStation())
+                            + getDistanceGas(compOrder1.getGasStation(), order2.getGasStation()) + d1g2;
+            nd2 = (compOrder2 == null) ? d2 + 2 * (d2g1 - d2g2) :
+                    d2 - d2g2 - getDistanceGas(order2.getGasStation(), compOrder2.getGasStation()) +
+                            getDistanceGas(compOrder2.getGasStation(), order1.getGasStation()) + d2g1;
+            dOk = ((nd1 <= max_distance && nd1 < d1) || i == ghost) && nd2 <= max_distance && nd2 < d2;
+        }
+        return dOk;
+    }
+
 
     protected boolean isNullOrder(int i, int j, int k){
         return trucks.get(i).get(j).getOrder(k) == null;

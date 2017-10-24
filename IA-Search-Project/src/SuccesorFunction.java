@@ -42,7 +42,9 @@ public class SuccesorFunction implements SuccessorFunction {
                                     if (state.canSwap(i, j, k, l, m, n)) {
                                         State nState = state.getCopy();
                                         nState.swap(i, j, k, l, m, n);
-                                        retVal.add(new Successor("", nState));
+                                        retVal.add(new Successor(
+                                            "Swap: (" + i + ", " + j + ", " + k + ") -> (" + l + ", " + m + ", " + n + ")",
+                                            nState));
                                     }
                                 }
                             }

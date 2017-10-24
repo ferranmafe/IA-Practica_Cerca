@@ -234,6 +234,9 @@ public class SearchGenerator {
                 case 1:
                     successor = new SuccesorFunction2();
                     break;
+                case 2:
+                    successor = new SuccesorFunction3();
+                    break;
                 default:
                     successor = new SuccesorFunction();
             }
