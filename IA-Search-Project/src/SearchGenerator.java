@@ -290,8 +290,8 @@ public class SearchGenerator {
 
             // We print the results of the search
             System.out.println();
-            //printActions(agent.getActions());
             printInstrumentation(agent.getInstrumentation());
+            printActions(agent.getActions());
 
             // You can access also to the goal state using the
             // method getGoalState of class Search
