@@ -1,3 +1,6 @@
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.PrintWriter;
 
 import IA.Gasolina.CentrosDistribucion;
 import IA.Gasolina.Gasolineras;
@@ -42,6 +45,8 @@ public class SearchGenerator {
             while (command.equals("continue")) {
                 enter_search_parameters();
                 generate_search();
+                System.out.println();
+                System.out.println("To run another iteration of the algorithm, type " + '"' + "continue" + '"' + ". Type anything else to quit:");
                 command = enter_new_string();
             }
         }
@@ -49,6 +54,8 @@ public class SearchGenerator {
             while (command.equals("continue")) {
                 enter_search_parameters_one_line();
                 generate_search();
+                System.out.println();
+                System.out.println("To run another iteration of the algorithm, type " + '"' + "continue" + '"' + ". Type anything else to quit:");
                 command = enter_new_string();
             }
         }
@@ -85,6 +92,12 @@ public class SearchGenerator {
                         this.stiter = Integer.parseInt(parts[2]);
                         this.k = Integer.parseInt(parts[3]);
                         this.lamb = Double.parseDouble(parts[4]);
+
+                        if (steps < 0 || !(steps%stiter == 0)) {
+                            validCommand = false;
+                            System.out.println("Wrong command.");
+                            System.out.println();
+                        }
 
                         List<String> list = new ArrayList<String>(Arrays.asList(parts));
                         list.remove(1);
@@ -342,6 +355,12 @@ public class SearchGenerator {
                 this.stiter = Integer.parseInt(parts[1]);
                 this.k = Integer.parseInt(parts[2]);
                 this.lamb = Double.parseDouble(parts[3]);
+
+                if (steps < 0 || !(steps%stiter == 0)) {
+                    correctCommand = false;
+                    System.out.println("Wrong command.");
+                    System.out.println();
+                }
             }
             catch (Exception e){
                 correctCommand = false;
@@ -349,7 +368,6 @@ public class SearchGenerator {
                 System.out.println();
             }
         }
-
     }
 
 
@@ -643,5 +661,24 @@ public class SearchGenerator {
         System.out.println("0 ->");
         System.out.println("1 ->");
         System.out.println();
+    }
+
+
+    private void write_csv(String csv_name, ArrayList<String> params) {
+        File file = new File(csv_name);
+        try {
+            PrintWriter pw = new PrintWriter(new FileOutputStream(file,true));
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < params.size(); ++i) {
+                sb.append(params.get(i));
+                if (i == params.size() - 1) sb.append('\n');
+                else sb.append(',');
+            }
+            pw.write(sb.toString());
+            pw.close();
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
