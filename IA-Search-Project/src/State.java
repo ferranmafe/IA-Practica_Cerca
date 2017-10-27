@@ -382,7 +382,7 @@ public class State {
     }
 
     public boolean isGoal(){
-        return true;
+        return false;
     }
 
     private int getCostTravels() {
