@@ -1,10 +1,10 @@
-import java.util.ArrayList;
-import java.util.List;
-
 import aima.search.framework.Successor;
 import aima.search.framework.SuccessorFunction;
 
-public class SuccesorFunction3 implements SuccessorFunction {
+import java.util.ArrayList;
+import java.util.List;
+
+public class SuccesorFunction4 implements SuccessorFunction {
 
     public List getSuccessors(Object aState) {
         ArrayList retVal = new ArrayList();
@@ -23,7 +23,7 @@ public class SuccesorFunction3 implements SuccessorFunction {
                         }
                         for (int m = 0; m < trucks.get(l).size(); ++m) {
                             for (int n = 0; n < 2; ++n) {
-                                if (state.canSwapOrder3(i, j, k, l, m, n)) {
+                                if (state.canSwapOrder4(i, j, k, l, m, n)) {
                                     State nState = state.getCopy();
                                     nState.swapOrder(i, j, k, l, m, n);
                                     retVal.add(new Successor(

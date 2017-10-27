@@ -36,7 +36,7 @@ public class SearchGenerator {
     private int petrol_stations_seed;
 
     private static final int NUMBER_HEURISTICS = 3;
-    private static final int NUMBER_SUCCESSORS = 3;
+    private static final int NUMBER_SUCCESSORS = 4;
     private static final int NUMBER_INITIAL_DISTRIBUTIONS = 3;
 
     SearchGenerator(String start_command) {
@@ -250,6 +250,9 @@ public class SearchGenerator {
                 case 2:
                     successor = new SuccesorFunction3();
                     break;
+                case 3:
+                    successor = new SuccesorFunction4();
+                    break;
                 default:
                     successor = new SuccesorFunction();
             }
@@ -291,12 +294,16 @@ public class SearchGenerator {
             // We print the results of the search
             System.out.println();
             printInstrumentation(agent.getInstrumentation());
-            printActions(agent.getActions());
+            //printActions(agent.getActions());
 
             // You can access also to the goal state using the
             // method getGoalState of class Search
-            System.out.println("Benefits: " + -((State)search.getGoalState()).getHeuristic1());
-            System.out.println("Benefits (with losses): " + -((State)search.getGoalState()).getHeuristic2());
+
+            int value = -((State)search.getGoalState()).getHeuristic1();
+            int valueLoss = -((State)search.getGoalState()).getHeuristic2();
+
+            System.out.println("Benefits: " + value);
+            System.out.println("Benefits (with losses): " + valueLoss);
 
             System.out.println ("Execution time: " + m + "ms");
         }
@@ -305,7 +312,6 @@ public class SearchGenerator {
         }
     }
 
-
     private static void printInstrumentation(Properties properties) {
         Iterator keys = properties.keySet().iterator();
         while (keys.hasNext()) {
@@ -313,7 +319,6 @@ public class SearchGenerator {
             String property = properties.getProperty(key);
             System.out.println(key + " : " + property);
         }
-
     }
 
 

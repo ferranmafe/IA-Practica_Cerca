@@ -192,6 +192,8 @@ public class State {
     }
 
     protected boolean canSwapOrder(int i, int j, int k, int l, int m, int n) {
+        //Cambia todos con todos
+
         if (trucks.get(i).get(j).getOrder(k) == null && trucks.get(l).get(m).getOrder(n) == null) {
             return false;
         }
@@ -208,11 +210,38 @@ public class State {
     }
 
     protected boolean canSwapOrder2(int i, int j, int k, int l, int m, int n) {
+        //Cambia solo entre los camiones, pero no con el ghost
+        // Sol Ini Vacía : 95680 / 4s
+        // Sol Ini Llena : 93316 / 3.5s
+
+
         if (trucks.get(i).get(j).getOrder(k) == null || trucks.get(l).get(m).getOrder(n) == null) {
             return false;
         }
 
         return i != ghost && (i > l || (i == l && j < m)) && isAllowedSwapDistance(i,j,k,l,m,n);
+    }
+
+    protected boolean canSwapOrder3(int i, int j, int k, int l, int m, int n) {
+        //Cambia solo entre un mismo camión
+
+        if (trucks.get(i).get(j).getOrder(k) == null || trucks.get(l).get(m).getOrder(n) == null) {
+            return false;
+        }
+
+        return  (i > l || (i == l && j < m && i != ghost)) && isAllowedSwapDistance(i,j,k,l,m,n);
+    }
+
+    protected boolean canSwapOrder4(int i, int j, int k, int l, int m, int n) {
+        //Cambia entre un mismo camión, y con el ghost: BEST :)
+        // Sol Ini Vacía : 95680 / 4s
+        // Sol Ini Llena : 93316 / 3.5s
+
+        if (trucks.get(i).get(j).getOrder(k) == null || trucks.get(l).get(m).getOrder(n) == null) {
+            return false;
+        }
+
+        return ((i == ghost && i > l) || (i == l && j < m && i != ghost)) && isAllowedSwapDistance(i,j,k,l,m,n);
     }
 
     protected boolean isAllowedAddDistance(int i, int j, int k, Order o){
