@@ -33,7 +33,7 @@ public class Test2 extends writer {
                     switch (j) {
                         case 0:
                             initial_state.emptyTrips();
-                            break;
+                             break;
                         case 1:
                             initial_state.randomTrips();
                             break;
