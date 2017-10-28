@@ -1,6 +1,8 @@
 import IA.Gasolina.*;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Random;
 
 public class State {
@@ -55,7 +57,7 @@ public class State {
         }
     }
 
-    public void greedyTrips() {
+    public void orderedTrips() {
         //Rellenamos todos los estados como nulos y luego iteraremos calulando distancias modo greedy y actualizando trips
         initializeStateToNull();
 
@@ -81,6 +83,41 @@ public class State {
                     }
                     k++;
                 }
+            }
+        }
+    }
+
+    public void greedyTrips() {
+        //Rellenamos todos los estados como nulos y luego iteraremos calulando distancias modo greedy y actualizando trips
+        initializeStateToNull();
+
+        ArrayList<Order> orders = new ArrayList<>();
+        for (int i = 0; i < gas.size(); ++i) {
+            for (int j = 0; j < gas.get(i).getPeticiones().size(); ++j) {
+                Order o = new Order(i, j);
+                orders.add(o);
+            }
+        }
+
+        for (int i = 0; i < ghost; ++i) {
+            final int truck = i;
+            Collections.sort(orders, new Comparator<Order>() {
+                @Override
+                public int compare(Order o1, Order o2) {
+                    return getDistanceCenter(truck, o1.getGasStation()) - getDistanceCenter(truck, o2.getGasStation());
+                }
+            });
+            int l = 0;
+            for (int j = 0; j < 5; ++j){
+                for (int k = 0; k < 2; ++k){
+                    if (isAllowedAddDistance(i,j,k,orders.get(l))){
+                        trucks.get(i).get(j).setOrder(orders.get(l),k);
+                        ++l;
+                    }
+                }
+            }
+            for (int m = 0; m < l; ++m){
+                orders.remove(m);
             }
         }
     }
@@ -223,7 +260,7 @@ public class State {
     }
 
     protected boolean canSwapOrder3(int i, int j, int k, int l, int m, int n) {
-        //Cambia solo entre un mismo camión
+        //todos con todos
 
         if (trucks.get(i).get(j).getOrder(k) == null || trucks.get(l).get(m).getOrder(n) == null) {
             return false;
