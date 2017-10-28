@@ -126,10 +126,10 @@ public class State {
         for (int i = 0; i < gas.size(); ++i) {
             ArrayList<Integer> gasOrders = gas.get(i).getPeticiones();
             for (int j = 0; j < gasOrders.size(); ++j) {
+                count++;
                 if (count % 2 == 1) {
                     trucks.get(ghost).add(new Trip(o));
                 }
-                count++;
             }
         }
         if (count % 2 == 0) {
@@ -382,7 +382,7 @@ public class State {
     }
 
     public boolean isGoal(){
-        return false;
+        return true;
     }
 
     private int getCostTravels() {
