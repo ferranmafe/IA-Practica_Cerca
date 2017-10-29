@@ -5,13 +5,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
-public class SuccesorFunction6 implements SuccessorFunction {
+public class SuccesorFunction7 implements SuccessorFunction {
     private static int steps;
     private static int stiter;
     private static int k;
     private static double lambda;
 
-    public SuccesorFunction6(int steps, int stiter, int k, double lambda) {
+    public SuccesorFunction7(int steps, int stiter, int k, double lambda) {
         this.steps = steps;
         this.stiter = stiter;
         this.k = k;
@@ -39,7 +39,7 @@ public class SuccesorFunction6 implements SuccessorFunction {
                             nState));
                 }
             } else if (operator == 1) {
-                if (state.canSwapOrder3(i, j, k, l, m, n)) {
+                if (state.canSwapOrder4(i, j, k, l, m, n)) {
                     State nState = state.getCopy();
                     nState.swapOrder(i, j, k, l, m, n);
                     retVal.add(new Successor(
