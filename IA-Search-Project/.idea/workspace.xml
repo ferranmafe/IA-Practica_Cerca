@@ -2,77 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1e2e66c7-1c69-415c-b38d-d12eca9de2ef" name="Default" comment="General update 2.0">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Test5.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/IA-Search-Project/SearchGenerator.class" afterPath="$PROJECT_DIR$/out/production/IA-Search-Project/SearchGenerator.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/IA-Search-Project/Test5.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/IA-Search-Project/Test6.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Test6.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/test5.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/test6.csv" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/IA-Search-Project/State$1.class" afterPath="$PROJECT_DIR$/out/production/IA-Search-Project/State$1.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/IA-Search-Project/State.class" afterPath="$PROJECT_DIR$/out/production/IA-Search-Project/State.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/IA-Search-Project/SuccesorFunction.class" afterPath="$PROJECT_DIR$/out/production/IA-Search-Project/SuccesorFunction.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/IA-Search-Project/SuccesorFunction2.class" afterPath="$PROJECT_DIR$/out/production/IA-Search-Project/SuccesorFunction2.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/IA-Search-Project/SuccesorFunction3.class" afterPath="$PROJECT_DIR$/out/production/IA-Search-Project/SuccesorFunction3.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/State.java" afterPath="$PROJECT_DIR$/src/State.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Test2.java" afterPath="$PROJECT_DIR$/src/Test2.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/aima/basic/Agent.java" afterPath="$PROJECT_DIR$/src/aima/basic/Agent.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/aima/basic/AgentProgram.java" afterPath="$PROJECT_DIR$/src/aima/basic/AgentProgram.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/aima/basic/BasicEnvironmentView.java" afterPath="$PROJECT_DIR$/src/aima/basic/BasicEnvironmentView.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/aima/basic/Environment.java" afterPath="$PROJECT_DIR$/src/aima/basic/Environment.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/aima/basic/EnvironmentObject.java" afterPath="$PROJECT_DIR$/src/aima/basic/EnvironmentObject.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/aima/basic/MockAgent.java" afterPath="$PROJECT_DIR$/src/aima/basic/MockAgent.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/aima/basic/ObjectWithDynamicAttributes.java" afterPath="$PROJECT_DIR$/src/aima/basic/ObjectWithDynamicAttributes.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/aima/basic/Percept.java" afterPath="$PROJECT_DIR$/src/aima/basic/Percept.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/aima/basic/Tokenizer.java" afterPath="$PROJECT_DIR$/src/aima/basic/Tokenizer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/aima/basic/Util.java" afterPath="$PROJECT_DIR$/src/aima/basic/Util.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/aima/basic/Wall.java" afterPath="$PROJECT_DIR$/src/aima/basic/Wall.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/aima/basic/XYEnvironment.java" afterPath="$PROJECT_DIR$/src/aima/basic/XYEnvironment.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/aima/basic/XYLocation.java" afterPath="$PROJECT_DIR$/src/aima/basic/XYLocation.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/aima/basic/vaccum/ModelBasedTVEVaccumAgent.java" afterPath="$PROJECT_DIR$/src/aima/basic/vaccum/ModelBasedTVEVaccumAgent.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/aima/basic/vaccum/ModelBasedTVEVaccumAgentProgram.java" afterPath="$PROJECT_DIR$/src/aima/basic/vaccum/ModelBasedTVEVaccumAgentProgram.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/aima/basic/vaccum/TrivialVaccumDemo.java" afterPath="$PROJECT_DIR$/src/aima/basic/vaccum/TrivialVaccumDemo.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/aima/basic/vaccum/TrivialVaccumEnvironment.java" afterPath="$PROJECT_DIR$/src/aima/basic/vaccum/TrivialVaccumEnvironment.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/aima/basic/vaccum/TveDemo.java" afterPath="$PROJECT_DIR$/src/aima/basic/vaccum/TveDemo.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/aima/basic/vaccum/VaccumEnvironmentModel.java" afterPath="$PROJECT_DIR$/src/aima/basic/vaccum/VaccumEnvironmentModel.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/aima/datastructures/FIFOQueue.java" afterPath="$PROJECT_DIR$/src/aima/datastructures/FIFOQueue.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/aima/datastructures/LIFOQueue.java" afterPath="$PROJECT_DIR$/src/aima/datastructures/LIFOQueue.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/aima/datastructures/PriorityQueue.java" afterPath="$PROJECT_DIR$/src/aima/datastructures/PriorityQueue.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/aima/search/framework/DefaultHeuristicFunction.java" afterPath="$PROJECT_DIR$/src/aima/search/framework/DefaultHeuristicFunction.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/aima/search/framework/DefaultStepCostFunction.java" afterPath="$PROJECT_DIR$/src/aima/search/framework/DefaultStepCostFunction.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/aima/search/framework/GoalTest.java" afterPath="$PROJECT_DIR$/src/aima/search/framework/GoalTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/aima/search/framework/GraphSearch.java" afterPath="$PROJECT_DIR$/src/aima/search/framework/GraphSearch.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/aima/search/framework/HeuristicFunction.java" afterPath="$PROJECT_DIR$/src/aima/search/framework/HeuristicFunction.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/aima/search/framework/Measurable.java" afterPath="$PROJECT_DIR$/src/aima/search/framework/Measurable.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/aima/search/framework/Metrics.java" afterPath="$PROJECT_DIR$/src/aima/search/framework/Metrics.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/aima/search/framework/Node.java" afterPath="$PROJECT_DIR$/src/aima/search/framework/Node.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/aima/search/framework/NodeExpander.java" afterPath="$PROJECT_DIR$/src/aima/search/framework/NodeExpander.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/aima/search/framework/NodeStore.java" afterPath="$PROJECT_DIR$/src/aima/search/framework/NodeStore.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/aima/search/framework/PrioritySearch.java" afterPath="$PROJECT_DIR$/src/aima/search/framework/PrioritySearch.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/aima/search/framework/Problem.java" afterPath="$PROJECT_DIR$/src/aima/search/framework/Problem.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/aima/search/framework/QueueSearch.java" afterPath="$PROJECT_DIR$/src/aima/search/framework/QueueSearch.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/aima/search/framework/Search.java" afterPath="$PROJECT_DIR$/src/aima/search/framework/Search.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/aima/search/framework/SearchAgent.java" afterPath="$PROJECT_DIR$/src/aima/search/framework/SearchAgent.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/aima/search/framework/SearchUtils.java" afterPath="$PROJECT_DIR$/src/aima/search/framework/SearchUtils.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/aima/search/framework/StepCostFunction.java" afterPath="$PROJECT_DIR$/src/aima/search/framework/StepCostFunction.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/aima/search/framework/Successor.java" afterPath="$PROJECT_DIR$/src/aima/search/framework/Successor.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/aima/search/framework/SuccessorFunction.java" afterPath="$PROJECT_DIR$/src/aima/search/framework/SuccessorFunction.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/aima/search/framework/TreeSearch.java" afterPath="$PROJECT_DIR$/src/aima/search/framework/TreeSearch.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/aima/search/informed/AStarSearch.java" afterPath="$PROJECT_DIR$/src/aima/search/informed/AStarSearch.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/aima/search/informed/DepthLimitedSearch.java" afterPath="$PROJECT_DIR$/src/aima/search/informed/DepthLimitedSearch.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/aima/search/informed/GreedyBestFirstSearch.java" afterPath="$PROJECT_DIR$/src/aima/search/informed/GreedyBestFirstSearch.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/aima/search/informed/HillClimbingSearch.java" afterPath="$PROJECT_DIR$/src/aima/search/informed/HillClimbingSearch.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/aima/search/informed/IterativeDeepeningAStarSearch.java" afterPath="$PROJECT_DIR$/src/aima/search/informed/IterativeDeepeningAStarSearch.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/aima/search/informed/Scheduler.java" afterPath="$PROJECT_DIR$/src/aima/search/informed/Scheduler.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/aima/search/informed/SimulatedAnnealingSearch.java" afterPath="$PROJECT_DIR$/src/aima/search/informed/SimulatedAnnealingSearch.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/aima/search/nodestore/FIFONodeStore.java" afterPath="$PROJECT_DIR$/src/aima/search/nodestore/FIFONodeStore.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/aima/search/nodestore/LIFONodeStore.java" afterPath="$PROJECT_DIR$/src/aima/search/nodestore/LIFONodeStore.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/aima/search/nodestore/PriorityNodeStore.java" afterPath="$PROJECT_DIR$/src/aima/search/nodestore/PriorityNodeStore.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/aima/search/uninformed/BreadthFirstSearch.java" afterPath="$PROJECT_DIR$/src/aima/search/uninformed/BreadthFirstSearch.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/aima/search/uninformed/DepthFirstSearch.java" afterPath="$PROJECT_DIR$/src/aima/search/uninformed/DepthFirstSearch.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/aima/search/uninformed/DepthLimitedSearch.java" afterPath="$PROJECT_DIR$/src/aima/search/uninformed/DepthLimitedSearch.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/aima/search/uninformed/IterativeDeepeningSearch.java" afterPath="$PROJECT_DIR$/src/aima/search/uninformed/IterativeDeepeningSearch.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/aima/util/AbstractQueue.java" afterPath="$PROJECT_DIR$/src/aima/util/AbstractQueue.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/aima/util/Calculator.java" afterPath="$PROJECT_DIR$/src/aima/util/Calculator.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/aima/util/LogicUtils.java" afterPath="$PROJECT_DIR$/src/aima/util/LogicUtils.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/aima/util/Pair.java" afterPath="$PROJECT_DIR$/src/aima/util/Pair.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/aima/util/Queue.java" afterPath="$PROJECT_DIR$/src/aima/util/Queue.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/aima/util/UniversalDictionary.java" afterPath="$PROJECT_DIR$/src/aima/util/UniversalDictionary.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/aima/util/Util.java" afterPath="$PROJECT_DIR$/src/aima/util/Util.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Test5.java" afterPath="$PROJECT_DIR$/src/Test5.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path=".idea/" />
@@ -99,36 +39,17 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="State.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="State.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/State.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-2376">
-              <caret line="248" column="35" lean-forward="false" selection-start-line="248" selection-start-column="35" selection-end-line="248" selection-end-column="35" />
+            <state relative-caret-position="154">
+              <caret line="458" column="96" lean-forward="true" selection-start-line="458" selection-start-column="40" selection-end-line="458" selection-end-column="96" />
               <folding>
-                <element signature="method#getLosses#0;class#State#0" expanded="false" />
+                <element signature="e#4620#4627#0" expanded="true" />
+                <element signature="method#getCostTravels#0;class#State#0" expanded="false" />
                 <element signature="method#getHeuristic3#0;class#State#0" expanded="false" />
-                <marker date="1509202970000" expanded="true" signature="9384:9431" ph="{...}" />
+                <marker date="1509260633000" expanded="true" signature="9860:9907" ph="{...}" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Test5.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/Test5.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-94">
-              <caret line="15" column="42" lean-forward="false" selection-start-line="15" selection-start-column="42" selection-end-line="15" selection-end-column="42" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="HeuristicFunction1.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/HeuristicFunction1.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="210">
-              <caret line="14" column="44" lean-forward="false" selection-start-line="14" selection-start-column="31" selection-end-line="14" selection-end-column="44" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -155,6 +76,8 @@
       <find>NUMBER_SUCCESSORS</find>
       <find>[2]</find>
       <find>i++</find>
+      <find>Sum</find>
+      <find>write_csv</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -176,12 +99,14 @@
         <option value="$PROJECT_DIR$/src/HeuristicFunction1.java" />
         <option value="$PROJECT_DIR$/src/Search_generator.java" />
         <option value="$PROJECT_DIR$/src/SuccesorFunction.java" />
-        <option value="$PROJECT_DIR$/src/State.java" />
         <option value="$PROJECT_DIR$/src/SuccesorFunction2.java" />
         <option value="$PROJECT_DIR$/src/SuccesorFunction3.java" />
         <option value="$PROJECT_DIR$/src/SearchGenerator.java" />
         <option value="$PROJECT_DIR$/src/Test2.java" />
         <option value="$PROJECT_DIR$/src/Test5.java" />
+        <option value="$PROJECT_DIR$/test5.csv" />
+        <option value="$PROJECT_DIR$/src/State.java" />
+        <option value="$PROJECT_DIR$/src/Test6.java" />
       </list>
     </option>
   </component>
@@ -262,7 +187,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.Test2">
+  <component name="RunManager" selected="Application.Test6">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <option name="MAIN_CLASS_NAME" value="Main" />
@@ -280,6 +205,34 @@
     <configuration name="Test2" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <option name="MAIN_CLASS_NAME" value="Test2" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="ENABLE_SWING_INSPECTOR" value="false" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <module name="IA-Search-Project" />
+      <envs />
+    </configuration>
+    <configuration name="Test5" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <option name="MAIN_CLASS_NAME" value="Test5" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="ENABLE_SWING_INSPECTOR" value="false" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <module name="IA-Search-Project" />
+      <envs />
+    </configuration>
+    <configuration name="Test6" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <option name="MAIN_CLASS_NAME" value="Test6" />
       <option name="VM_PARAMETERS" />
       <option name="PROGRAM_PARAMETERS" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
@@ -670,14 +623,18 @@
     <configuration default="true" type="osgi.bnd.run" factoryName="Test Launcher (JUnit)">
       <method />
     </configuration>
-    <list size="2">
+    <list size="4">
       <item index="0" class="java.lang.String" itemvalue="Application.Main" />
       <item index="1" class="java.lang.String" itemvalue="Application.Test2" />
+      <item index="2" class="java.lang.String" itemvalue="Application.Test5" />
+      <item index="3" class="java.lang.String" itemvalue="Application.Test6" />
     </list>
     <recent_temporary>
-      <list size="2">
-        <item index="0" class="java.lang.String" itemvalue="Application.Test2" />
-        <item index="1" class="java.lang.String" itemvalue="Application.Main" />
+      <list size="4">
+        <item index="0" class="java.lang.String" itemvalue="Application.Test6" />
+        <item index="1" class="java.lang.String" itemvalue="Application.Test5" />
+        <item index="2" class="java.lang.String" itemvalue="Application.Test2" />
+        <item index="3" class="java.lang.String" itemvalue="Application.Main" />
       </list>
     </recent_temporary>
   </component>
@@ -706,7 +663,7 @@
       <workItem from="1508933672662" duration="2593000" />
       <workItem from="1508936365539" duration="922000" />
       <workItem from="1508961565971" duration="527000" />
-      <workItem from="1509203019312" duration="1099000" />
+      <workItem from="1509203019312" duration="6094000" />
     </task>
     <task id="LOCAL-00001" summary="Testing">
       <created>1508665202679</created>
@@ -726,7 +683,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="63757000" />
+    <option name="totallyTimeSpent" value="68752000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -804,52 +761,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/Trip.java" />
-    <entry file="file://$PROJECT_DIR$/src/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/IA-Search-Project.iml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.idea/modules.xml" />
-    <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="10" column="46" lean-forward="false" selection-start-line="10" selection-start-column="46" selection-end-line="10" selection-end-column="46" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/src/Gasolina.jar!/IA/Gasolina/Test.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-294">
-          <caret line="9" column="13" lean-forward="false" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/src/Gasolina.jar!/IA/Gasolina/Gasolinera.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="71">
-          <caret line="9" column="13" lean-forward="false" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_112.jdk/Contents/Home/src.zip!/java/util/Map.java" />
     <entry file="jar://$PROJECT_DIR$/src/Gasolina.jar!/IA/Gasolina/Gasolineras.class">
       <provider selected="true" editor-type-id="text-editor">
@@ -875,9 +786,10 @@
         <state relative-caret-position="193">
           <caret line="94" column="15" lean-forward="true" selection-start-line="94" selection-start-column="15" selection-end-line="95" selection-end-column="45" />
           <folding>
-            <element signature="method#getLosses#0;class#State#0" expanded="false" />
+            <element signature="e#4620#4627#0" expanded="true" />
+            <element signature="method#getCostTravels#0;class#State#0" expanded="false" />
             <element signature="method#getHeuristic3#0;class#State#0" expanded="false" />
-            <marker date="1509202970000" expanded="true" signature="9384:9431" ph="{...}" />
+            <marker date="1509260633000" expanded="true" signature="9860:9907" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -887,9 +799,10 @@
         <state relative-caret-position="345">
           <caret line="24" column="0" lean-forward="false" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
           <folding>
-            <element signature="method#getLosses#0;class#State#0" expanded="false" />
+            <element signature="e#4620#4627#0" expanded="true" />
+            <element signature="method#getCostTravels#0;class#State#0" expanded="false" />
             <element signature="method#getHeuristic3#0;class#State#0" expanded="false" />
-            <marker date="1509202970000" expanded="true" signature="9384:9431" ph="{...}" />
+            <marker date="1509260633000" expanded="true" signature="9860:9907" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -1046,7 +959,7 @@
         <state relative-caret-position="30">
           <caret line="6" column="0" lean-forward="false" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="imports" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1056,7 +969,7 @@
         <state relative-caret-position="540">
           <caret line="40" column="1" lean-forward="false" selection-start-line="40" selection-start-column="1" selection-end-line="40" selection-end-column="1" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="imports" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1066,24 +979,8 @@
         <state relative-caret-position="15">
           <caret line="292" column="0" lean-forward="false" selection-start-line="292" selection-start-column="0" selection-end-line="292" selection-end-column="0" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="imports" expanded="false" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Test2.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="405">
-          <caret line="35" column="7" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="78" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Test1.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="10" column="13" lean-forward="false" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1095,23 +992,106 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/State.java">
+    <entry file="file://$PROJECT_DIR$/src/Test2.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2376">
-          <caret line="248" column="35" lean-forward="false" selection-start-line="248" selection-start-column="35" selection-end-line="248" selection-end-column="35" />
+        <state relative-caret-position="405">
+          <caret line="35" column="6" lean-forward="false" selection-start-line="35" selection-start-column="6" selection-end-line="35" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Test0.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-428">
+          <caret line="10" column="13" lean-forward="false" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/writer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret line="6" column="23" lean-forward="false" selection-start-line="6" selection-start-column="23" selection-end-line="6" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Test1.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-104">
+          <caret line="10" column="13" lean-forward="false" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test5_1.csv">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test5_2.csv">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="2" column="0" lean-forward="true" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test5_3.csv">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="2" column="0" lean-forward="true" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test5.csv">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="20" column="0" lean-forward="false" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test6.csv">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Test6.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1080">
+          <caret line="80" column="63" lean-forward="false" selection-start-line="80" selection-start-column="63" selection-end-line="80" selection-end-column="63" />
           <folding>
-            <element signature="method#getLosses#0;class#State#0" expanded="false" />
-            <element signature="method#getHeuristic3#0;class#State#0" expanded="false" />
-            <marker date="1509202970000" expanded="true" signature="9384:9431" ph="{...}" />
+            <element signature="e#3647#3656#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Test5.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-94">
-          <caret line="15" column="42" lean-forward="false" selection-start-line="15" selection-start-column="42" selection-end-line="15" selection-end-column="42" />
+        <state relative-caret-position="-266">
+          <caret line="29" column="15" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="74" selection-end-column="0" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/State.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="154">
+          <caret line="458" column="96" lean-forward="true" selection-start-line="458" selection-start-column="40" selection-end-line="458" selection-end-column="96" />
+          <folding>
+            <element signature="e#4620#4627#0" expanded="true" />
+            <element signature="method#getCostTravels#0;class#State#0" expanded="false" />
+            <element signature="method#getHeuristic3#0;class#State#0" expanded="false" />
+            <marker date="1509260633000" expanded="true" signature="9860:9907" ph="{...}" />
+          </folding>
         </state>
       </provider>
     </entry>

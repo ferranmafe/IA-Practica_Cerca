@@ -12,6 +12,7 @@ public class State {
 
     private static int max_trips;
     private static int max_distance;
+    private static int price_km;
 
 
     private ArrayList<ArrayList<Trip> > trucks;
@@ -32,7 +33,24 @@ public class State {
         ghost = distr.size();
         max_trips = 5;
         max_distance = 640;
+        price_km = 2;
 
+        trucks = new ArrayList<>(ghost + 1);
+
+        for (int i = 0; i < ghost + 1; i++){
+            trucks.add(new ArrayList<>());
+        }
+
+        //crear estado inicial a partir de los desasignados
+    }
+
+    public State(Gasolineras g, CentrosDistribucion c, int pkm) {
+        gas = g;
+        distr = c;
+        ghost = distr.size();
+        max_trips = 5;
+        max_distance = 640;
+        price_km = pkm;
         trucks = new ArrayList<>(ghost + 1);
 
         for (int i = 0; i < ghost + 1; i++){
@@ -217,7 +235,7 @@ public class State {
         return false;
     }
 
-    private int sumDistance(int i){
+    protected int sumDistance(int i){
         int sum = 0;
         if (i == ghost){
             return 0;
@@ -427,7 +445,7 @@ public class State {
         for (int i = 0; i < ghost; ++i) {
             distance_cost += sumDistance(i);
         }
-        return distance_cost * 2;
+        return distance_cost * price_km;
     }
 
     private int getLosses() {
