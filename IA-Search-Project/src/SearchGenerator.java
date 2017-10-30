@@ -245,16 +245,16 @@ public class SearchGenerator {
                     successor = new SuccesorFunction();
                     break;
                 case 1:
-                    successor = new SuccesorFunction2();
+                    successor = new SuccesorFunction5();
                     break;
                 case 2:
                     successor = new SuccesorFunction3();
                     break;
                 case 3:
-                    successor = new SuccesorFunction4();
+                    successor = new SuccesorFunction2();
                     break;
                 case 4:
-                    successor = new SuccesorFunction5();
+                    successor = new SuccesorFunction4();
                     break;
                 case 5:
                     successor = new SuccesorFunction6();
@@ -667,9 +667,13 @@ public class SearchGenerator {
 
     private void show_successors_info() {
         System.out.println("These are the kind of successors that you can use:");
-        System.out.println("0 ->");
-        System.out.println("1 ->");
-        System.out.println();
+        System.out.println("0 -> Only one operator SWAP, that swaps any order from any truck (including ghost) with any other order. It can swap null orders (adding and removing orders)");
+        System.out.println("1 -> Operator ADD that moves one unassigned order from the ghost truck to any other truck)");
+        System.out.println("2 -> Operator ADD (same as above) and operator SWAP that swaps any non-null order from any truck including ghost with any other truck");
+        System.out.println("3 -> Operator ADD (same as above) and operator SWAP that swaps between every truck that isn't the ghost");
+        System.out.println("4 -> Operator ADD (same as above) and operator SWAP that swaps any non-null order from any truck with any other order from that same truck");
+        System.out.println("5 -> Same operators from option 3 but implemented for the Simulated Annealing algorithm");
+
     }
 
 
