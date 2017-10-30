@@ -36,8 +36,8 @@ public class SearchGenerator {
     private int petrol_stations_seed;
 
     private static final int NUMBER_HEURISTICS = 3;
-    private static final int NUMBER_SUCCESSORS = 4;
-    private static final int NUMBER_INITIAL_DISTRIBUTIONS = 3;
+    private static final int NUMBER_SUCCESSORS = 6;
+    private static final int NUMBER_INITIAL_DISTRIBUTIONS = 4;
 
     SearchGenerator(String start_command) {
         String command = "continue";
@@ -253,6 +253,12 @@ public class SearchGenerator {
                 case 3:
                     successor = new SuccesorFunction4();
                     break;
+                case 4:
+                    successor = new SuccesorFunction5();
+                    break;
+                case 5:
+                    successor = new SuccesorFunction6();
+                    break;
                 default:
                     successor = new SuccesorFunction();
             }
@@ -264,9 +270,12 @@ public class SearchGenerator {
                     initial_state.emptyTrips();
                     break;
                 case 1:
-                    initial_state.greedyTrips();
+                    initial_state.orderedTrips();
                     break;
                 case 2:
+                    initial_state.greedyTrips();
+                    break;
+                case 3:
                     initial_state.randomTrips();
                     break;
                 default:
@@ -651,8 +660,6 @@ public class SearchGenerator {
         System.out.println("0 -> Heuristic that only takes into consideration the benefits and the travel costs");
         System.out.println("1 -> Heuristic that takes into consideration the benefits, the travel costs and the losses");
         System.out.println("2 -> Heuristic that works like heuristic 1 but giving more importance to the benefits");
-        System.out.println("3 -> Heuristic that works like heuristic 1 but giving more importance to the travel costs");
-        System.out.println("4 -> Heuristic that works like heuristic 1 but giving more importance to the losses");
         System.out.println();
 
     }
@@ -668,8 +675,10 @@ public class SearchGenerator {
 
     private void show_distributions_info() {
         System.out.println("These are the kind of initial distributions that you can use:");
-        System.out.println("0 ->");
-        System.out.println("1 ->");
+        System.out.println("0 -> No orders assigned to the trucks");
+        System.out.println("1 -> The orders are assigned in order (the first order of the first petrol station is assigned first)");
+        System.out.println("2 -> The orders are assigned using a greedy algorithm");
+        System.out.println("3 -> The orders are assigned randomly to the trucks");
         System.out.println();
     }
 }
