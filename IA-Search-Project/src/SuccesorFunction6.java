@@ -1,22 +1,14 @@
 import aima.search.framework.Successor;
 import aima.search.framework.SuccessorFunction;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class SuccesorFunction6 implements SuccessorFunction {
-    private static int steps;
-    private static int stiter;
-    private static int k;
-    private static double lambda;
-
-    public SuccesorFunction6(int steps, int stiter, int k, double lambda) {
-        this.steps = steps;
-        this.stiter = stiter;
-        this.k = k;
-        this.lambda = lambda;
-    }
 
     public List getSuccessors(Object aState) {
         ArrayList retVal = new ArrayList();
@@ -38,8 +30,9 @@ public class SuccesorFunction6 implements SuccessorFunction {
                             "Add: (" + i + ", " + j + ", " + k + ") -> (" + l + ")",
                             nState));
                 }
+
             } else if (operator == 1) {
-                if (state.canSwapOrder3(i, j, k, l, m, n)) {
+                if (state.canSwapOrder2(i, j, k, l, m, n)) {
                     State nState = state.getCopy();
                     nState.swapOrder(i, j, k, l, m, n);
                     retVal.add(new Successor(

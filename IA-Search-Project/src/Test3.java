@@ -13,21 +13,21 @@ public class Test3 extends writer {
 
     public static void main(String[] args) {
         try {
-            ArrayList<Integer> k = new ArrayList<Integer>(){{add(1); add(5); add(25); add (60); add(90); add(120);}};
-            ArrayList<Double> lambda = new ArrayList<Double>() {{add(1.0); add(0.1); add(0.01); add(0.001); add(0.0001);}};
+            ArrayList<Integer> k = new ArrayList<Integer>(){{add(60);}};
+            ArrayList<Double> lambda = new ArrayList<Double>() {{add(0.0003);}};
 
-                for (int steps = 2000; steps <= 2000; steps += 500) {
-                    for (int stiter = 80; stiter <= 160; stiter += 20) {
+                for (int steps = 2500; steps <= 2500; steps += 500) {
+                    for (int stiter = 100; stiter <= 100; stiter += 20) {
                         for (int j = 0; j < k.size(); ++j) {
                             for (int z = 0; z < lambda.size(); ++z) {
-                                for (int i = 0; i < 10; ++i) {
+                                for (int i = 0; i < 1; ++i) {
                                 Date d1, d2;
                                 Calendar c1, c2;
 
                                 CentrosDistribucion centros_distribucion = new CentrosDistribucion(10, 1, 1234);
                                 Gasolineras gasolineras = new Gasolineras(100, 1234);
 
-                                SuccesorFunction6 succesorFunction = new SuccesorFunction6(steps, stiter, k.get(j), lambda.get(z));
+                                SuccesorFunction6 succesorFunction = new SuccesorFunction6();
 
                                 HeuristicFunction heuristic = new HeuristicFunction1();
 
@@ -51,15 +51,7 @@ public class Test3 extends writer {
                                 System.out.println();
                                 System.out.println();
                                 System.out.println();
-                                ArrayList<String> output = new ArrayList<String>();
-                                output.add(Integer.toString(steps));
-                                output.add(Integer.toString(stiter));
-                                output.add(Integer.toString(k.get(j)));
-                                output.add(Double.toString(lambda.get(z)));
-                                output.add(Integer.toString(val));
-                                output.add(Long.toString(time));
 
-                                write_csv("test3.csv", output);
                             }
                         }
                     }
