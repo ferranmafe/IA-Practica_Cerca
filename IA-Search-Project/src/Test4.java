@@ -23,18 +23,18 @@ public class Test4 extends writer {
         try {
             for (int z = 0; z < 20; ++z) {
                 for (int i = 0; i < 10; ++i) {
-                    Date d1, d2, d3, d4;
-                    Calendar c1, c2, c3, c4;
+                    Date d1, d2;
+                    Calendar c1, c2;
 
                     CentrosDistribucion centros_distribucion = new CentrosDistribucion(ndc, 1, 1234);
                     Gasolineras gasolineras = new Gasolineras(ngas, 1234);
 
-                    SuccesorFunction2 succesorFunction = new SuccesorFunction2();
+                    SuccesorFunction6 succesorFunction = new SuccesorFunction6();
 
                     HeuristicFunction heuristic = new HeuristicFunction1();
 
                     State initial_state = new State(gasolineras, centros_distribucion);
-                    Search search = new HillClimbingSearch();
+                    Search search = new SimulatedAnnealingSearch(steps, stiter, k, lambda);
                     Problem problem;
                     initial_state.emptyTrips();
 
@@ -48,19 +48,15 @@ public class Test4 extends writer {
                     c2.setTime(d2);
                     long time = (c2.getTimeInMillis() - c1.getTimeInMillis());
                     int val = -((State) search.getGoalState()).getHeuristic2();
-                    System.out.println("Execution time: " + time);
+                    System.out.println("Execution time: " + time + "ms");
                     System.out.println("Benefits: " + val);
-                    System.out.println("Relation: " + val / time);
                     System.out.println();
                     System.out.println();
                     System.out.println();
 
                     ArrayList<String> write = new ArrayList<>();
-                    write.add(Integer.toString(ndc));
-                    write.add(Integer.toString(ngas));
                     write.add(Long.toString(time));
-                    write.add(Integer.toString(val));
-                    write_csv("test4_HC.csv", write);
+                    write_csv("test4_SA" + i +".csv", write);
                 }
                 ndc += 10;
                 ngas += 100;
