@@ -14,6 +14,7 @@ public class Test6 extends writer {
             //El Experimento pretende comparar el número de peticiones atendidas segun el coste de cada kilometro reocrrido
             //y la influencia de el numero de días que lleva la peticion sin atender
             System.out.println("Experiment number 6:");
+            ArrayList<ArrayList<String>> datos_csv = new ArrayList<ArrayList<String>>();
             for (int i = 0; i < 10; ++i) {
                 Date d1, d2, d3, d4;
                 Calendar c1, c2, c3, c4;
@@ -33,6 +34,23 @@ public class Test6 extends writer {
                 //Con este bucle trataremos los casos precio km =[2,...,2^10]
                 for (int j = 0; j < 10; ++j) {
                     precio_km = 2*precio_km;
+                    if (i == 0) {
+                        if (j == 0) {
+                            datos_csv.add(new ArrayList<>());
+                            datos_csv.get(0).add("Cost_km");
+                        }
+                        datos_csv.add(new ArrayList<>());
+                        datos_csv.get(5*j+1).add("O" + j);
+                        datos_csv.add(new ArrayList<>());
+                        datos_csv.get(5*j+2).add("P0" + j);
+                        datos_csv.add(new ArrayList<>());
+                        datos_csv.get(5*j+3).add("P1" + j);
+                        datos_csv.add(new ArrayList<>());
+                        datos_csv.get(5*j+4).add("P2" + j);
+                        datos_csv.add(new ArrayList<>());
+                        datos_csv.get(5*j+5).add("P3" + j);
+                        datos_csv.get(0).add(Integer.toString(precio_km));
+                    }
                     System.out.println("Iteration number " + (i+1) + ", km_price: " + precio_km);
                     //Generamos el estado inicial, ahora teniendo en cuenta el precio del km
                     State initial_state = new State(gasolineras, centros_distribucion, precio_km);
@@ -55,33 +73,51 @@ public class Test6 extends writer {
                     System.out.println();
                     System.out.println();
 
-                    ArrayList<String> write = new ArrayList<>();
-                    write.add("It " + (i+1) + " Mult " + j);
-                    write.add("Time");
-                    write.add(Long.toString(time));
-                    write.add("Benefits");
-                    write.add(Integer.toString(val));
                     ArrayList<ArrayList<Trip>> trucks = ((State) search.getGoalState()).getState();
                     int order_count = 0;
                     ArrayList<Integer> order_day = new ArrayList<Integer>();
-                    for (int l = 0; l < trucks.size() - 1; l++){
-                        for (int m = 0; m < trucks.get(l).size(); m++){
-                            for (int n = 0; n < 2; n++){
-                                if (trucks.get(l).get(m).getOrder(n) != null){
+                    for (int l = 0; l < trucks.size() - 1; l++) {
+                        for (int m = 0; m < trucks.get(l).size(); m++) {
+                            for (int n = 0; n < 2; n++) {
+                                if (trucks.get(l).get(m).getOrder(n) != null) {
                                     order_count++;
-                                    int gas_station_num = trucks.get(l).get(m).getOrder(n).getGasStation();
-                                    int order_num = trucks.get(l).get(m).getOrder(n).getNumOrder();
-                                    order_day.add(gasolineras.get(gas_station_num).getPeticiones().get(order_num));
                                 }
                             }
                         }
                     }
-                    write.add("Iteration number " + (i+1) + ", km_price: " + precio_km);
-                    write.add("Orders: " + order_count);
-                    write.add("Days: " + order_day.toString());
-                    write_csv("test6.csv", write);
+                    datos_csv.get(5*j+1).add(Integer.toString(order_count));
+
+                    for (int day_num = 0; day_num < 4; day_num++){
+                        double order_tot = 0;
+                        double order_valid = 0;
+                        for (int l = 0; l < trucks.size(); l++) {
+                            for (int m = 0; m < trucks.get(l).size(); m++) {
+                                for (int n = 0; n < 2; n++) {
+                                    if (trucks.get(l).get(m).getOrder(n) != null ) {
+                                        int gas_station_num = trucks.get(l).get(m).getOrder(n).getGasStation();
+                                        int order_num = trucks.get(l).get(m).getOrder(n).getNumOrder();
+                                        if (gasolineras.get(gas_station_num).getPeticiones().get(order_num) == day_num) {
+                                            order_tot++;
+                                            if (l != trucks.size() - 1) {
+                                                order_valid++;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        if (order_tot == 0.0){
+                            datos_csv.get(5 * j + 2 + day_num).add(Double.toString(0.0));
+                        }
+                        else {
+                            datos_csv.get(5 * j + 2 + day_num).add(Double.toString(order_valid / order_tot));
+                        }
+                    }
+
+
                 }
             }
+            write_csv2("test6.csv", datos_csv);
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -21,4 +21,24 @@ public abstract class writer {
             e.printStackTrace();
         }
     }
+
+    public static void write_csv2(String csv_name, ArrayList<ArrayList<String>> params) {
+        File file = new File(csv_name);
+        try {
+            PrintWriter pw = new PrintWriter(new FileOutputStream(file,true));
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < params.get(0).size(); ++i) {
+                for (int j = 0; j < params.size(); j++) {
+                    sb.append(params.get(j).get(i));
+                    sb.append(';');
+                }
+                sb.append('\n');
+            }
+            pw.write(sb.toString());
+            pw.close();
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

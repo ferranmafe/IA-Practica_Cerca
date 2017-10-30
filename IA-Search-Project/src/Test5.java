@@ -15,6 +15,13 @@ public class Test5 extends writer {
             //centros de distribucion (augmentar multiplicidad de los camiones)
             //Estudiaremos 10 iteraciones y en cada una se generará un seed con multiplicidad 1 y 2 para obtener diferencias
             System.out.println("Experiment number 5:");
+            ArrayList<ArrayList<String>> beneficios = new ArrayList<ArrayList<String>>();
+            beneficios.add(new ArrayList<>());
+            beneficios.add(new ArrayList<>());
+            ArrayList<ArrayList<String>> km_recorridos = new ArrayList<ArrayList<String>>();
+            km_recorridos.add(new ArrayList<>());
+            km_recorridos.add(new ArrayList<>());
+
             for (int i = 0; i < 10; ++i) {
                 Date d1, d2, d3, d4;
                 Calendar c1, c2, c3, c4;
@@ -46,13 +53,23 @@ public class Test5 extends writer {
                     c2.setTime(d2);
                     long time = (c2.getTimeInMillis() - c1.getTimeInMillis());
                     int val = -((State) search.getGoalState()).getHeuristic2();
+
+
                     System.out.println("Execution time: " + time);
                     System.out.println("Benefits: " + val);
                     System.out.println("Relation: " + val / time);
                     System.out.println();
                     System.out.println();
-                    System.out.println();
+                    beneficios.get(j-1).add(Integer.toString(val));
 
+                    ArrayList<ArrayList<Trip>> trucks = ((State) search.getGoalState()).getState();
+                    int suma_dist = 0;
+                    for (int k = 0; k < trucks.size(); k++){
+                        suma_dist += ((State) search.getGoalState()).sumDistance(k);
+                    }
+                    km_recorridos.get(j-1).add(Integer.toString(suma_dist));
+
+                    /*
                     ArrayList<String> write = new ArrayList<>();
                     write.add("It " + (i+1) + " Mult " + j);
                     write.add("Time");
@@ -65,8 +82,11 @@ public class Test5 extends writer {
                         write.add(Integer.toString(((State) search.getGoalState()).sumDistance(k)));
                     }
                     write_csv("test5.csv", write);
+                    */
                 }
             }
+            write_csv2("test5_benefits.csv", beneficios);
+            write_csv2("test5_distances.csv", km_recorridos);
         } catch (Exception e) {
             e.printStackTrace();
         }
