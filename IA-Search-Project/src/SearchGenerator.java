@@ -672,7 +672,7 @@ public class SearchGenerator {
         System.out.println("2 -> Operator ADD (same as above) and operator SWAP that swaps any non-null order from any truck including ghost with any other truck");
         System.out.println("3 -> Operator ADD (same as above) and operator SWAP that swaps between every truck that isn't the ghost");
         System.out.println("4 -> Operator ADD (same as above) and operator SWAP that swaps any non-null order from any truck with any other order from that same truck");
-        System.out.println("5 -> Same operators from option 3 but implemented for the Simulated Annealing algorithm");
+        System.out.println("5 -> Same operators from option 2 but implemented for the Simulated Annealing algorithm");
 
     }
 
